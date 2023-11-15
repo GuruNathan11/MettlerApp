@@ -46,19 +46,6 @@ const AddLabtest = ({ navigation, route }) => {
     
   }, []);
 
-//   const allergyData = allergyNames.map((item) => ({
-//     label: item.value,
-//     value: item.id,
-//   }));
-//   const natureData = natureOfReactions.map((item) => ({
-//     label: item.value,
-//     value: item.id,
-//   }));
-//   const symptomsData = symptoms.map((item) => ({
-//     label: item.value,
-//     value: item.id,
-//   }));
-
   const mappedData = [
     {
       placeholder: 'Lab Test',
@@ -148,18 +135,15 @@ const AddLabtest = ({ navigation, route }) => {
   const handleSubmit = async () => {
     const rObj = {
       patientId: item?.id,
-      imagingType: values[0],
-      reasonForStudy: values[1],
-      modifiers: values[2],
-      dateDesired:values[3],
+      collectionType: values[0],
+      collectionDateTime: values[1],
+      collectionSample: values[2],
+      specimen:values[3],
       urgency: values[4],
-      transport: values[5],
-      category: values[6],
-      submitTo: values[7],
-      preOpScheduled: values[8],
-      examsOver: values[9],
-      orderedBy: values[10],
-      enteredBy: values[11],
+      howOften: values[5],
+      howLong: values[6],
+      orderedBy: values[7],
+      enteredBy: values[8],
       comments: comments,
     };
     if (values.length > 4) {

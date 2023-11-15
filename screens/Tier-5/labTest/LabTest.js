@@ -64,7 +64,7 @@ const LabTest = ({ route }) => {
               activeOpacity={0.8}
               style={styles.pBtn}
               onPress={() => {
-                 navigation.navigate('LabtestDetails', { item});
+                 navigation.navigate('LabDetails', { item});
               }}
             >
               <View style={styles.patientView}>

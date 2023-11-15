@@ -46,6 +46,7 @@ import VitalDetails from './Tier-6/vitalDetails/VitalDetails';
 import ProcedureDetails from './Tier-6/ProcedureDetails/ProcedureDetails';
 import ImagingDetails from './Tier-6/ImagingDetails/ImagingDetails';
 import LabDetails from './Tier-6/LabDetails/LabDetails';
+import ConsultDetails from './Tier-6/ConsultDetails/ConsultDetails';
 export {
   AdminConfiguration,
   AddAllergy,
@@ -95,4 +96,5 @@ export {
   VitalDetails,
   ImagingDetails,
   LabDetails,
+  ConsultDetails,
 };

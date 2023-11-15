@@ -47,7 +47,7 @@ const Consult = ({ route }) => {
             activeOpacity={0.8}
             onPress={() => {
               // navigation.navigate('ProcedureDetails', {item});
-                //  navigation.navigate('AddImagingProcedure', { item });
+                  navigation.navigate('AddConsult', { item });
             }}
           >
             <MCIcon name="plus" size={30} color="#020202" />
@@ -64,7 +64,7 @@ const Consult = ({ route }) => {
               activeOpacity={0.8}
               style={styles.pBtn}
               onPress={() => {
-              //  navigation.navigate('ImagingDetails', { item});
+                navigation.navigate('ConsultDetails', { item});
               }}
             >
               <View style={styles.patientView}>

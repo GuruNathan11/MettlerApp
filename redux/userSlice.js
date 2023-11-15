@@ -22,6 +22,7 @@ const userSlice = createSlice({
     todayStaffs: [],
     allShiftStaffs: [],
     allergyData: [],
+    labtestData: [],
     patientVisits: [],
     patientProblem: [],
     immunizationData: [],
@@ -34,6 +35,7 @@ const userSlice = createSlice({
     immunizationRoute: [],
     anatomicLocation: [],
     location: [],
+    Urgency: [],
     treatmentFactors: [],
     patientPosition: [],
     todayRN: null,
@@ -168,6 +170,10 @@ const userSlice = createSlice({
       state.pending = false;
       state.allergyData = action.payload;
     },
+    getLabtestSuccess: (state, action) => {
+      state.pending = false;
+      state.allergyData = action.payload;
+    },
     getPatientLastVisitSuccess: (state, action) => {
       state.pending = false;
       state.lastVisitId = action.payload;
@@ -220,6 +226,10 @@ const userSlice = createSlice({
       state.pending = false;
       state.location = action.payload;
     },
+    getUrgencySuccess: (state, action) => {
+      state.pending = false;
+      state.Urgency = action.payload;
+    },
     getTreatmentFactorsSuccess: (state, action) => {
       state.pending = false;
       state.treatmentFactors = action.payload;
@@ -252,6 +262,7 @@ export const {
   getCompletedQ15Success,
   getIncompletedQ15Success,
   getLocationSuccess,
+  getUrgencySuccess,
   getTreatmentFactorsSuccess,
   getNatureOfReactionSuccess,
   getPatientAllVisitSuccess,
@@ -273,5 +284,6 @@ export const {
   selectedOrg,
   sKeyVerifySuccess,
   getAllergyByPatientSuccess,
+  getLabtestSuccess,
 } = userSlice.actions;
 export default userSlice.reducer;

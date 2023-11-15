@@ -9,7 +9,7 @@ import {
 import { Button, CheckBox, PatientHeader } from '../../../components';
 import {
   // getPatientVisit,
-  postlabpro,
+//   postlabpro,
    getDropdowns,
 //   getAllergyNames,
 } from '../../../redux/apiCalls';
@@ -18,7 +18,7 @@ import DatePicker from 'react-native-date-picker';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector } from 'react-redux';
 
-const AddProcedure = ({ navigation, route }) => {
+const AddConsult = ({ navigation, route }) => {
   const { item } = route.params;
   const dispatch = useDispatch();
   const lastVisitId = useSelector((state) => state.user.lastVisitId);
@@ -43,26 +43,25 @@ const AddProcedure = ({ navigation, route }) => {
   );
 
   useEffect(() => {
-    getPatientVisit(dispatch, patient.id);
-    getDropdowns(dispatch, 'Urgency');
+    
   }, []);
 
-  const UrgencyData = Urgency.map((item) => ({
+  const allergyData = allergyNames.map((item) => ({
     label: item.value,
     value: item.id,
   }));
-  // const natureData = natureOfReactions.map((item) => ({
-  //   label: item.value,
-  //   value: item.id,
-  // }));
-  // const symptomsData = symptoms.map((item) => ({
-  //   label: item.value,
-  //   value: item.id,
-  // }));
+  const natureData = natureOfReactions.map((item) => ({
+    label: item.value,
+    value: item.id,
+  }));
+  const symptomsData = symptoms.map((item) => ({
+    label: item.value,
+    value: item.id,
+  }));
 
   const mappedData = [
     {
-      placeholder: 'Procedure',
+      placeholder: 'Service/Speciality',
       data: [
         { label: 'Normal', value: 'Normal' },
         { label: 'Mild', value: 'Mild' },
@@ -71,13 +70,17 @@ const AddProcedure = ({ navigation, route }) => {
     },
     {
       placeholder: 'Urgency',
-      data:  {
-        placeholder: 'Urgency',
-        data: UrgencyData,
-      },
+      data: [
+        { label: 'Project Management Levels', value: 'Project Management Levels' },
+        { label: 'Critical/Urgent', value: 'Critical/Urgent' },
+        { label: 'High Priority', value: 'High Priority' },
+        { label: 'Medium Priority', value: 'Medium Priority' },
+        { label: 'Low Priority', value: 'Low Priority' },
+        { label: 'Routine/Non-Urgent', value: 'Routine/Non-Urgent' },
+      ],
     },
     {
-      placeholder: 'Service to problem this procedure',
+      placeholder: 'Attention',
       data: [
         { label: 'Normal', value: 'Normal' },
         { label: 'Mild', value: 'Mild' },
@@ -130,11 +133,11 @@ const AddProcedure = ({ navigation, route }) => {
   const handleSubmit = async () => {
     const rObj = {
       patientId: item?.id,
-      procedure: values[0],
+      speciality: values[0],
       urgency: values[1],
       serviceProblem:[2],
       appropriateDate:values[3],
-      consultation: values[4],
+      placeOfConsultation: values[4],
       provisionalDiagnosis:[5],
       orderedBy: values[6],
       enteredBy: values[7],
@@ -169,7 +172,6 @@ const AddProcedure = ({ navigation, route }) => {
         alignItems: 'center',
       }}
     >
-     
       {mappedData.slice(0, 4).map((data, index) => (
         <View key={index} style={styles.inputView}>
           <Dropdown
@@ -374,4 +376,4 @@ const AddProcedure = ({ navigation, route }) => {
   );
 };
 
-export default AddProcedure;
+export default AddConsult;

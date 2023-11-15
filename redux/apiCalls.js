@@ -16,6 +16,7 @@ import {
   getImmunizationSuccess,
   getIncompletedQ15Success,
   getLocationSuccess,
+  getUrgencySucess,
   getNatureOfReactionSuccess,
   getPatientAllVisitSuccess,
   getPatientLastVisitSuccess,
@@ -39,6 +40,7 @@ import {
   postQ15EntrySuccess,
   retriveLoginSuccess,
   sKeyVerifySuccess,
+  
 } from './userSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {BASE_URL} from '@env';
@@ -526,6 +528,9 @@ export const getDropdowns = async (dispatch, name) => {
     else if (name === 'location') {
       dispatch(getLocationSuccess(res.data.data[0].list));
     }
+    else if (name === ' Urgency') {
+      dispatch(getUrgencySuccess(res.data.data[0].list));
+    }
     else if (name === 'TreatmentFactors') {
       dispatch(getTreatmentFactorsSuccess(res.data.data[0].list));
     }
@@ -723,6 +728,17 @@ export const LabTest = async (dispatch, rObj) => {
   } catch (error) {
     console.log(error);
     console.log(rObj);
+    dispatch(apiCallError(error.response.data.errorMessage));
+  }
+};
+export const getLabTest= async (dispatch, pid) => {
+  dispatch(apiCallStart());
+  try {
+    const res = await axios.get(`${baseURL}/labTest/ById/${pid}`);
+    // console.log(res.data.data);
+    dispatch(Success(res.data.data));
+  } catch (error) {
+    console.log(error);
     dispatch(apiCallError(error.response.data.errorMessage));
   }
 };

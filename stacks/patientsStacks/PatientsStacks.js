@@ -37,6 +37,8 @@ import {
 import AddProcedure from '../../screens/Tier-6/addProcedure/AddProcedure';
 import AddImagingProcedure from  '../../screens/Tier-6/AddImaging/AddImagingProcedure';
 import AddLabtest from '../../screens/Tier-6/addLab/AddLabtest';
+import AddConsult from '../../screens/Tier-6/addConsult/AddConsult';
+import ConsultDetails from '../../screens/Tier-6/ConsultDetails/ConsultDetails';
 const Stack = createNativeStackNavigator();
 const PatientsStacks = () => {
   return (
@@ -90,8 +92,8 @@ const PatientsStacks = () => {
       <Stack.Screen name="ImagingDetails" component={ImagingDetails} />
       <Stack.Screen name="AddLabtest" component={AddLabtest} />
       <Stack.Screen name="LabDetails" component={LabDetails} />
-
-     
+      <Stack.Screen name="AddConsult" component={AddConsult} />
+      <Stack.Screen name="ConsultDetails" component={ConsultDetails} />
     </Stack.Navigator>
   );
 };
