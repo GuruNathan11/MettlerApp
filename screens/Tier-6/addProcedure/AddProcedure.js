@@ -11,6 +11,7 @@ import {
   // getPatientVisit,
   postlabpro,
    getDropdowns,
+  //  getPatientVisit,
 //   getAllergyNames,
 } from '../../../redux/apiCalls';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -23,6 +24,7 @@ const AddProcedure = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const lastVisitId = useSelector((state) => state.user.lastVisitId);
   const username = useSelector((state) => state.user.userInfo.username);
+  const Procedure = useSelector((state) => state.user.ProcedureData);
   const [observed, setObserved] = useState(true);
   const [historical, setHistorical] = useState(false);
   const [date, setDate] = useState(new Date());
@@ -33,8 +35,7 @@ const AddProcedure = ({ navigation, route }) => {
   const [reactDate, setReactDate] = useState(null);
   const [comments, setComments] = useState(null);
   const allergyNames = useSelector((state) => state.user.allergyNames);
-  const natureOfReactions = useSelector((state) => state.user.natureOfReactions);
-  const symptoms = useSelector((state) => state.user.symptoms);
+  
   const [values, setValues] = useState(
     Array(mappedData?.length).fill(null)
   );
@@ -42,24 +43,15 @@ const AddProcedure = ({ navigation, route }) => {
     Array(mappedData?.length).fill(false)
   );
 
-  useEffect(() => {
-    getPatientVisit(dispatch, patient.id);
-    getDropdowns(dispatch, 'Urgency');
-  }, []);
+  // useEffect(()=>{
+  //   getDropdowns(dispatch,'Urgency')
+  // })
 
-  const UrgencyData = Urgency.map((item) => ({
-    label: item.value,
-    value: item.id,
-  }));
-  // const natureData = natureOfReactions.map((item) => ({
+  // const ProcedureData = Procedure.map((item) => ({
   //   label: item.value,
   //   value: item.id,
   // }));
-  // const symptomsData = symptoms.map((item) => ({
-  //   label: item.value,
-  //   value: item.id,
-  // }));
-
+  
   const mappedData = [
     {
       placeholder: 'Procedure',
@@ -71,10 +63,11 @@ const AddProcedure = ({ navigation, route }) => {
     },
     {
       placeholder: 'Urgency',
-      data:  {
-        placeholder: 'Urgency',
-        data: UrgencyData,
-      },
+      data: [
+        { label: 'Normal', value: 'Normal' },
+        { label: 'Mild', value: 'Mild' },
+        { label: 'Severe', value: 'Severe' },
+      ],
     },
     {
       placeholder: 'Service to problem this procedure',

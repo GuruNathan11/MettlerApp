@@ -16,7 +16,7 @@ import {
   getImmunizationSuccess,
   getIncompletedQ15Success,
   getLocationSuccess,
-  getUrgencySucess,
+  getUrgencySuccess,
   getNatureOfReactionSuccess,
   getPatientAllVisitSuccess,
   getPatientLastVisitSuccess,
@@ -40,6 +40,8 @@ import {
   postQ15EntrySuccess,
   retriveLoginSuccess,
   sKeyVerifySuccess,
+  getprocedureDataSuccess,
+  getUrgencyDataSuccess,
   
 } from './userSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -507,7 +509,7 @@ export const getDropdowns = async (dispatch, name) => {
     const res = await axios.get(
       `${baseURL}/dropdowns/getByDropdown?dropdown=${name}`,
     );
-    console.log(res.data.data);
+    console.log(res.data.data[0].list);
     if (name === 'allergyName') {
       dispatch(getAllergyNamesSuccess(res.data.data[0].list));
     } else if (name === 'natureOfReaction') {
@@ -529,7 +531,8 @@ export const getDropdowns = async (dispatch, name) => {
       dispatch(getLocationSuccess(res.data.data[0].list));
     }
     else if (name === ' Urgency') {
-      dispatch(getUrgencySuccess(res.data.data[0].list));
+      console.log(res.data.data[0])
+      dispatch(getUrgencyDataSuccess(res.data.data[0].list));
     }
     else if (name === 'TreatmentFactors') {
       dispatch(getTreatmentFactorsSuccess(res.data.data[0].list));
@@ -709,9 +712,27 @@ export const labimgpro = async (dispatch, rObj) => {
   } catch (error) {
     console.log(error);
     console.log(rObj);
+    // Alert.alert(error);
     dispatch(apiCallError(error.response.data.errorMessage));
   }
 };
+
+// export const getImagingProceture = async (dispatch, pid) => {
+//   dispatch(apiCallStart());
+//   try {
+//     const res = await axios.get(
+//       `${baseURL}/labimgpro/getAll`,
+//     );
+//     if (res.data.message.code === successCode) {
+//       dispatch(getImmunizationSuccess(res.data.data));
+//     } else {
+//       dispatch(getImmunizationSuccess(null));
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     dispatch(apiCallError(error.response.data.errorMessage));
+//   }
+// };
 
 // LabDetails
 
@@ -735,7 +756,7 @@ export const getLabTest= async (dispatch, pid) => {
   dispatch(apiCallStart());
   try {
     const res = await axios.get(`${baseURL}/labTest/ById/${pid}`);
-    // console.log(res.data.data);
+     console.log(res.data.data);
     dispatch(Success(res.data.data));
   } catch (error) {
     console.log(error);

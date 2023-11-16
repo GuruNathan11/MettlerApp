@@ -9,7 +9,7 @@ import {
 import { Button, CheckBox, PatientHeader } from '../../../components';
 import {
   getPatientVisit,
-  postlabimgpro,
+  labimgpro,
    getDropdowns,
   getAllergyNames,
 } from '../../../redux/apiCalls';
@@ -163,7 +163,7 @@ const AddImagingProcedure = ({ navigation, route }) => {
       patientId: item?.id,
       imagingType: values[0],
       reasonForStudy: values[1],
-      modifiers: values[2],
+      modifiers: [values[2]],
       dateDesired:values[3],
       urgency: values[4],
       transport: values[5],
@@ -176,7 +176,7 @@ const AddImagingProcedure = ({ navigation, route }) => {
       comments: comments,
     };
     if (values.length > 4) {
-        postlabimgpro(dispatch, rObj)
+      labimgpro(dispatch, rObj)
         .then(() => {
           setValues(Array(mappedData?.length).fill(null));
           setComments(null);

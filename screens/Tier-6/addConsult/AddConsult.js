@@ -9,7 +9,7 @@ import {
 import { Button, CheckBox, PatientHeader } from '../../../components';
 import {
   // getPatientVisit,
-//   postlabpro,
+   postlabConsult,
    getDropdowns,
 //   getAllergyNames,
 } from '../../../redux/apiCalls';
@@ -33,8 +33,6 @@ const AddConsult = ({ navigation, route }) => {
   const [reactDate, setReactDate] = useState(null);
   const [comments, setComments] = useState(null);
   const allergyNames = useSelector((state) => state.user.allergyNames);
-  const natureOfReactions = useSelector((state) => state.user.natureOfReactions);
-  const symptoms = useSelector((state) => state.user.symptoms);
   const [values, setValues] = useState(
     Array(mappedData?.length).fill(null)
   );
@@ -47,14 +45,6 @@ const AddConsult = ({ navigation, route }) => {
   }, []);
 
   const allergyData = allergyNames.map((item) => ({
-    label: item.value,
-    value: item.id,
-  }));
-  const natureData = natureOfReactions.map((item) => ({
-    label: item.value,
-    value: item.id,
-  }));
-  const symptomsData = symptoms.map((item) => ({
     label: item.value,
     value: item.id,
   }));
@@ -136,15 +126,16 @@ const AddConsult = ({ navigation, route }) => {
       speciality: values[0],
       urgency: values[1],
       serviceProblem:[2],
-      appropriateDate:values[3],
-      placeOfConsultation: values[4],
-      provisionalDiagnosis:[5],
-      orderedBy: values[6],
-      enteredBy: values[7],
+      appropriateDate:values[8],
+      observed:true ,
+      placeOfConsultation: values[3],
+      provisionalDiagnosis:[4],
+      orderedBy: values[5],
+      enteredBy: values[6],
       comments: comments,
     };
     if (values.length > 4) {
-      postlabpro(dispatch, rObj)
+      postlabConsult(dispatch, rObj)
         .then(() => {
           setValues(Array(mappedData?.length).fill(null));
           setComments(null);
@@ -203,16 +194,17 @@ const AddConsult = ({ navigation, route }) => {
               );
             }}
             onBlur={() => {
-              setIsFocusArray((prevState) =>
+              setIsFocusArray(prevState =>
                 prevState.map((isFocused, i) =>
-                  i === index ? false : isFocused
-                )
+                  i === index ? false : isFocused,
+                ),
               );
             }}
-            onChange={(selectedItem) => {
+            onChange={selectedItem => { 
               const newValues = [...values];
               newValues[index] = selectedItem.value;
               setValues(newValues);
+              console.log(values);
             }}
           />
         </View>
