@@ -8,10 +8,10 @@ import {
 } from 'react-native-responsive-screen';
 import { Button, CheckBox, PatientHeader } from '../../../components';
 import {
-//   getPatientVisit,
-      postlabTest,
-//    getDropdowns,
-//   getAllergyNames,
+   getPatientVisit,
+    labTest,
+   getDropdowns,
+   getAllergyNames,
 } from '../../../redux/apiCalls';
 import { ScrollView } from 'react-native-gesture-handler';
 import DatePicker from 'react-native-date-picker';
@@ -147,7 +147,7 @@ const AddLabtest = ({ navigation, route }) => {
       comments: comments,
     };
     if (values.length > 4) {
-        postlabimgpro(dispatch, rObj)
+        labTest(dispatch, rObj)
         .then(() => {
           setValues(Array(mappedData?.length).fill(null));
           setComments(null);
@@ -307,7 +307,7 @@ const AddLabtest = ({ navigation, route }) => {
             }}
             onChange={(selectedItem) => {
               const newValues = [...values];
-              newValues[index + 6] = selectedItem.value;
+              newValues[index] = selectedItem.value;
               setValues(newValues);
             }}
           />

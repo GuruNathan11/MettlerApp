@@ -8,10 +8,10 @@ import {
 } from 'react-native-responsive-screen';
 import { Button, CheckBox, PatientHeader } from '../../../components';
 import {
-  // getPatientVisit,
-   postlabConsult,
+   getPatientVisit,
+   labConsult,
    getDropdowns,
-//   getAllergyNames,
+   getAllergyNames,
 } from '../../../redux/apiCalls';
 import { ScrollView } from 'react-native-gesture-handler';
 import DatePicker from 'react-native-date-picker';
@@ -125,17 +125,17 @@ const AddConsult = ({ navigation, route }) => {
       patientId: item?.id,
       speciality: values[0],
       urgency: values[1],
-      serviceProblem:[2],
+      serviceProblem:values[2],
       appropriateDate:values[8],
       observed:true ,
       placeOfConsultation: values[3],
-      provisionalDiagnosis:[4],
+      provisionalDiagnosis:values[4],
       orderedBy: values[5],
       enteredBy: values[6],
       comments: comments,
     };
     if (values.length > 4) {
-      postlabConsult(dispatch, rObj)
+      labConsult(dispatch, rObj)
         .then(() => {
           setValues(Array(mappedData?.length).fill(null));
           setComments(null);

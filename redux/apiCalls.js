@@ -682,10 +682,10 @@ export const getImmunization = async (dispatch, pid) => {
 };
 
 // //procedure-order
-export const postlabpro = async (dispatch, rObj) => {
+export const labpro = async (dispatch, rObj) => {
   dispatch(apiCallStart());
   try {
-    const res = await axios.post(`${baseURL}/lappro/register`, rObj);
+    const res = await axios.post(`${baseURL}/labpro/register`, rObj);
     if (res.data?.message.code === successCode) {
       Alert.alert('METTLER HEALTH CARE', 'Procedure Added Successfully');
       dispatch(apiCallSuccess());
@@ -734,14 +734,14 @@ export const labimgpro = async (dispatch, rObj) => {
 //   }
 // };
 
-// LabDetails
+// LabTest
 
-export const LabTest = async (dispatch, rObj) => {
+export const labTest = async (dispatch, rObj) => {
   dispatch(apiCallStart());
   try {
     const res = await axios.post(`${baseURL}/labTest/register`, rObj);
     if (res.data?.message.code === successCode) {
-      Alert.alert('METTLER HEALTH CARE', 'LabTest Added Successfully');
+      Alert.alert('METTLER HEALTH CARE', 'labTest Added Successfully');
       dispatch(apiCallSuccess());
     } else {
       Alert.alert('METTLER HEALTH CARE', res.data.message.description);
@@ -749,10 +749,12 @@ export const LabTest = async (dispatch, rObj) => {
   } catch (error) {
     console.log(error);
     console.log(rObj);
+     Alert.alert(error);
     dispatch(apiCallError(error.response.data.errorMessage));
   }
 };
-export const getLabTest= async (dispatch, pid) => {
+// get labtest
+export const getlabTest= async (dispatch, pid) => {
   dispatch(apiCallStart());
   try {
     const res = await axios.get(`${baseURL}/labTest/ById/${pid}`);
@@ -760,6 +762,24 @@ export const getLabTest= async (dispatch, pid) => {
     dispatch(Success(res.data.data));
   } catch (error) {
     console.log(error);
+    dispatch(apiCallError(error.response.data.errorMessage));
+  }
+};
+//labConsult
+export const labConsult = async (dispatch, rObj) => {
+  dispatch(apiCallStart());
+  try {
+    const res = await axios.post(`${baseURL}/labConsult/register`, rObj);
+    if (res.data?.message.code === successCode) {
+      Alert.alert('METTLER HEALTH CARE', 'labConsult Added Successfully');
+      dispatch(apiCallSuccess());
+    } else {
+      Alert.alert('METTLER HEALTH CARE', res.data.message.description);
+    }
+  } catch (error) {
+    console.log(error);
+    console.log(rObj);
+     Alert.alert(error);
     dispatch(apiCallError(error.response.data.errorMessage));
   }
 };

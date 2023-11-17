@@ -19,8 +19,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {
   getDropdowns,
   getPatientVisit,
-  postAllergy,
-  postProblem,
+  postPatientVitals,
 } from '../../../redux/apiCalls';
 import {ScrollView} from 'react-native-gesture-handler';
 import DatePicker from 'react-native-date-picker';
@@ -137,20 +136,20 @@ const AddVitals = ({navigation, route}) => {
   const handleSubmit = async () => {
     const rObj = {
       patientId: patient.id,
-      immunization: values[2],
-      dueDate: values[4],
-      doneDate: values[5],
-      administrationDate: values[6],
-      administeredBy: values[7],
-      orderedBy: values[8],
-      route: values[9],
-      anatomicLocation: values[10],
-      series: values[11],
-      dosage: values[12],
+      immediacy: values[1],
+      dateOfOnset: enteredDate,
+      problemCategory: values[0],
+      treatmentFactors: [values[6]],
+      clinic: values[5],
+      respProvider: values[4],
+      locationOfProblem: values[3],
+      problemDescription: values[2],
+      lastUpdateDate: reactDate,
+      lastVisit: lastVisitId,
       comments: comments,
     };
     if (values.length > 4) {
-      postProblem(dispatch, rObj)
+      postPatientVitals(dispatch, rObj)
         .then(() => {
           setValues(Array(mappedData?.length).fill(null));
           setComments(null);

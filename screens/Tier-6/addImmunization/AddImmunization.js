@@ -80,7 +80,7 @@ const AddImmunization = ({navigation, route}) => {
       data: allergyData,
     },
     {
-      placeholder: 'Administeredy',
+      placeholder: 'AdministeredBy',
       data: natureData,
     },
     {
@@ -108,20 +108,18 @@ const AddImmunization = ({navigation, route}) => {
   const handleSubmit = async () => {
     const rObj = {
       patientId: patient.id,
-      causativeAgentName: values[1],
-      enteredDate,
-      physicianName: values[0],
-      allergyType: '',
-      symptoms: [values[4]],
-      allergySeverity: values[3],
-      natureOfReaction: values[2],
-      observed: '',
-      observedDetails: {
-        reactionDateTime: reactDate,
-      },
-      inactive: false,
+      dueDate:enteredDate,
+      immunization: values[0],
+      lotNo: values[1],
+      anatomicLocation: values[4],
+      route: values[3],
+      administeredBy: values[2],
+      series:values[5],
+      dosage:values[6],
+      orderedBy: values[7],
+     doneDate:reactDate,
       lastVisit: lastVisitId,
-      comments: comments,
+      comments,
       administeringByPolicy,
       includeNonVAProviders,
     };

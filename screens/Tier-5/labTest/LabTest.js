@@ -12,7 +12,7 @@ const LabTest = ({ route }) => {
   const navigation = useNavigation();
 
   
-  const boneMarrowBiopsyData = [
+  const deoxycortiysolData = [
     '11-deoxycortiysol',
     '11-deoxycortiysol',
     '11-deoxycortiysol',
@@ -57,7 +57,7 @@ const LabTest = ({ route }) => {
 
       <View style={styles.flatList}>
         <FlatList
-          data={boneMarrowBiopsyData}
+          data={deoxycortiysolData}
           showsVerticalScrollIndicator={false}
           renderItem={({ item, index }) => (
             <TouchableOpacity

@@ -8,11 +8,10 @@ import {
 } from 'react-native-responsive-screen';
 import { Button, CheckBox, PatientHeader } from '../../../components';
 import {
-  // getPatientVisit,
-  postlabpro,
+   getPatientVisit,
+   labpro,
    getDropdowns,
-  //  getPatientVisit,
-//   getAllergyNames,
+   getAllergyNames,
 } from '../../../redux/apiCalls';
 import { ScrollView } from 'react-native-gesture-handler';
 import DatePicker from 'react-native-date-picker';
@@ -125,16 +124,17 @@ const AddProcedure = ({ navigation, route }) => {
       patientId: item?.id,
       procedure: values[0],
       urgency: values[1],
-      serviceProblem:[2],
-      appropriateDate:values[3],
-      consultation: values[4],
-      provisionalDiagnosis:[5],
-      orderedBy: values[6],
-      enteredBy: values[7],
+      serviceProblem: values[2],
+      // appropriateDate,
+      observed: true,
+      consultation: values[3],
+      provisionalDiagnosis: values[4],
+      orderedBy: values[5],
+      enteredBy: values[6],
       comments: comments,
     };
     if (values.length > 4) {
-      postlabpro(dispatch, rObj)
+      labpro(dispatch, rObj)
         .then(() => {
           setValues(Array(mappedData?.length).fill(null));
           setComments(null);
