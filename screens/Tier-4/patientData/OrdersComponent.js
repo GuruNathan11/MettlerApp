@@ -44,7 +44,7 @@ const OrdersComponent = ({navigation, patient}) => {
             <TouchableOpacity
               activeOpacity={0.8}
               style={styles.pBtn}
-              onPress={() => navigation.navigate(item.destination, {patient:item})}>
+              onPress={() => navigation.navigate(item.destination, {patient})}>
               <View style={styles.patientView}>
                 {/* <View
                   style={{

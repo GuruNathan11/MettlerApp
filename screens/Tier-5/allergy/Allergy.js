@@ -59,7 +59,8 @@ const Allergy = ({route}) => {
   useEffect(() => {
     if (isFocused) {
       // Check if the screen is in focus
-      getAllergyByPatient(dispatch, pid);
+    console.log(patient);
+    getAllergyByPatient(dispatch, pid);
     }
   }, [isFocused]);
   return (

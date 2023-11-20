@@ -1,30 +1,41 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { PatientHeader } from '../../../components';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
 import { styles } from './styles';
-import { useNavigation } from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
+import { getProcedurePatient } from '../../../redux/apiCalls'; // Assuming this is the correct import path
 
-const Procedure = ({ route }) => {
-  const { item } = route.params;
-  const navigation = useNavigation();
+// const Procedure = ({ route }) => {
+  // const navigation = useNavigation();
+  // const dispatch = useDispatch();
+    // const {patient} = route.params;
+    // const pid = patient.id;
+  // const ProcedureData = useSelector(state => state.user.ProcedureData);
 
-  // Example data for "Bone Marrow Biopsy"
-  const boneMarrowBiopsyData = [
-    'Bone Marrow Biopsy',
-    'Bone Marrow Biopsy',
-    'Bone Marrow Biopsy',
-    'Bone Marrow Biopsy',
-    'Bone Marrow Biopsy',
-    'Bone Marrow Biopsy',
-  ];
-
+  // useEffect(() => {
+  //   getProcedurePatient(dispatch, pid);
+  //   console.log(patient?.id);
+  // }, [dispatch, patient]);
+  const Procedure = ({route}) => {
+    const {patient} = route.params;
+    const pid = patient?.id;
+    const dispatch = useDispatch();
+    const ProcedureData = useSelector(state => state.user.ProcedureData);
+    const navigation = useNavigation(); // Use useNavigation hook
+    const isFocused = useIsFocused(); // Use useIsFocused hook to check screen focus
+  
+    useEffect(() => {
+      getProcedurePatient(dispatch, pid);
+    console.log(patient?.username);
+  }, [dispatch, patient]);
   return (
     <View style={styles.container}>
       <PatientHeader
         onBack={() => navigation.goBack()}
-        patientName={item?.username}
+        patientName={patient?.username}
         patientAge="24 Yrs"
       />
       <View
@@ -46,8 +57,7 @@ const Procedure = ({ route }) => {
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={() => {
-              // navigation.navigate('ProcedureDetails', {item});
-                 navigation.navigate('AddProcedure', { item });
+              navigation.navigate('AddProcedure', { item });
             }}
           >
             <MCIcon name="plus" size={30} color="#020202" />
@@ -57,18 +67,19 @@ const Procedure = ({ route }) => {
 
       <View style={styles.flatList}>
         <FlatList
-          data={boneMarrowBiopsyData}
+          data={ProcedureData}
+          keyExtractor={(item) => item.id.toString()} // Assuming 'id' is a unique identifier for each procedure
           showsVerticalScrollIndicator={false}
           renderItem={({ item, index }) => (
             <TouchableOpacity
               activeOpacity={0.8}
               style={styles.pBtn}
               onPress={() => {
-                navigation.navigate('ProcedureDetails', { item});
+                navigation.navigate('ProcedureDetails', { patient });
               }}
             >
               <View style={styles.patientView}>
-                <Text style={styles.patientName}>{item}</Text>
+                <Text style={styles.patientName}>{item.urgency}</Text>
                 <View style={styles.arrowView}>
                   <MIcon name="arrow-forward-ios" size={35} color="#8d8d8d" />
                 </View>

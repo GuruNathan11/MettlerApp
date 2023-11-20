@@ -247,6 +247,11 @@ const userSlice = createSlice({
       state.pending = false;
      state.ProcedureData = action.payload;
     },
+    // procedures 
+    getProcedureByPatientSuccess: (state, action) => {
+      state.pending = false;
+      state.ProcedureData = action.payload;
+    },
   },
 });
 
@@ -294,6 +299,7 @@ export const {
   selectedOrg,
   sKeyVerifySuccess,
   getAllergyByPatientSuccess,
+  getProcedureByPatientSuccess,
   getLabtestSuccess,
   getProcedureDataSuccess,
 } = userSlice.actions;
