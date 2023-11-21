@@ -6,7 +6,7 @@ import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
 import { styles } from './styles';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
-import { getImagingProceture } from '../../../redux/apiCalls';
+import { getImagingProcedurePatient } from '../../../redux/apiCalls';
 
 const ImagingProcedure = ({route}) => {
   const {patient} = route.params;
@@ -14,9 +14,9 @@ const ImagingProcedure = ({route}) => {
   const dispatch = useDispatch();
   const ImagingProcedureData = useSelector(state => state.user.ImagingProcedureData);
   const navigation = useNavigation(); // Use useNavigation hook
-
+  const isFocused = useIsFocused(); // Use useIsFocused hook to check screen focus
   useEffect(() => {
-    getImagingProceture(dispatch, pid);
+    getImagingProcedurePatient(dispatch, pid);
   console.log(patient?.username);
 }, [dispatch, patient]);
 
@@ -47,7 +47,7 @@ const ImagingProcedure = ({route}) => {
             activeOpacity={0.8}
             onPress={() => {
               // navigation.navigate('ProcedureDetails', {item});
-                 navigation.navigate('AddImagingProcedure', { item });
+                 navigation.navigate('AddImagingProcedure', { patient });
             }}
           >
             <MCIcon name="plus" size={30} color="#020202" />
@@ -58,17 +58,20 @@ const ImagingProcedure = ({route}) => {
       <View style={styles.flatList}>
         <FlatList
           data={ImagingProcedureData}
+          keyExtractor={(item) => item.id.toString()} // Assuming 'id' is a unique identifier for each procedure
           showsVerticalScrollIndicator={false}
           renderItem={({ item, index }) => (
             <TouchableOpacity
               activeOpacity={0.8}
               style={styles.pBtn}
               onPress={() => {
-               navigation.navigate('ImagingDetails', { patient });
+                // console.log(patient)
+               navigation.navigate('ImagingDetails', { item });
               }}
             >
+              
               <View style={styles.patientView}>
-                <Text style={styles.patientName}>{item.id}</Text>
+                <Text style={styles.patientName}>{item.reasonForStudy}</Text>
                 <View style={styles.arrowView}>
                   <MIcon name="arrow-forward-ios" size={35} color="#8d8d8d" />
                 </View>

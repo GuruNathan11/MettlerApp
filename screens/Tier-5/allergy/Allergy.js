@@ -90,6 +90,7 @@ const Allergy = ({route}) => {
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={() => {
+              // console.log(patient)
               navigation.navigate('AddAllergy', {patient});
             }}>
             <MCIcon name="plus" size={30} color="#020202" />

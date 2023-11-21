@@ -122,7 +122,7 @@ const AddConsult = ({ navigation, route }) => {
 
   const handleSubmit = async () => {
     const rObj = {
-      patientId: item?.id,
+      pid: item?.id,
       speciality: values[0],
       urgency: values[1],
       serviceProblem:values[2],

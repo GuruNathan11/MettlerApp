@@ -47,6 +47,10 @@ import ProcedureDetails from './Tier-6/ProcedureDetails/ProcedureDetails';
 import ImagingDetails from './Tier-6/ImagingDetails/ImagingDetails';
 import LabDetails from './Tier-6/LabDetails/LabDetails';
 import ConsultDetails from './Tier-6/ConsultDetails/ConsultDetails';
+import AddProcedure from './Tier-6/addProcedure/AddProcedure';
+import  AddImagingProcedure from './Tier-6/AddImaging/AddImagingProcedure';
+import  AddLabtest from './Tier-6/addLab/AddLabtest';
+import AddConsult from './Tier-6/addConsult/AddConsult';
 export {
   AdminConfiguration,
   AddAllergy,
@@ -97,4 +101,8 @@ export {
   ImagingDetails,
   LabDetails,
   ConsultDetails,
+  AddProcedure,
+  AddImagingProcedure,
+  AddLabtest,
+  AddConsult, 
 };

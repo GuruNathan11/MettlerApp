@@ -10,6 +10,7 @@ import {
   getAllTodayStaffsSuccess,
   getAllergyByPatientSuccess,
   getProcedureByPatientSuccess,
+  getImagingProcedureByPatientSuccess,
   getAllergyNamesSuccess,
   getAnatomicLocationSuccess,
   getCompletedQ15Success,
@@ -718,23 +719,23 @@ export const labimgpro = async (dispatch, rObj) => {
   }
 };
 
-export const getImagingProceture = async (dispatch, pid) => {
-  dispatch(apiCallStart());
-  try {
-    const res = await axios.get(
-      `${baseURL}/labimgpro/getAll`,
-    );
-    if (res.data.message.code === successCode) {
-      Alert.alert(res.data.message.code)
-      dispatch(getImmunizationSuccess(res.data.data));
-    } else {
-      dispatch(getImmunizationSuccess(null));
-    }
-  } catch (error) {
-    console.log(error);
-    dispatch(apiCallError(error.response.data.errorMessage));
-  }
-};
+// export const getImagingProceture = async (dispatch, pid) => {
+//   dispatch(apiCallStart());
+//   try {
+//     const res = await axios.get(
+//       `${baseURL}/labimgpro/getByPid/${pid}`,
+//     );
+//     if (res.data.message.code === successCode) {
+//       // Alert.alert(res.data.message.code)
+//       dispatch(getImmunizationSuccess(res.data.data));
+//     } else {
+//       dispatch(getImmunizationSuccess(null));
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     dispatch(apiCallError(error.response.data.errorMessage));
+//   }
+// };
 
 // LabTest
 
@@ -793,6 +794,20 @@ export const getProcedurePatient = async (dispatch, pid) => {
     const res = await axios.get(`${baseURL}/labpro/getByPid/${pid}`);
     // console.log(res.data.data);
     dispatch(getProcedureByPatientSuccess(res.data.data));
+    // Alert.alert(res.data.message.code)
+    // Alert.alert(pid)
+  } catch (error) {
+    console.log(error);
+    dispatch(apiCallError(error.response.data.errorMessage));
+  }
+};
+// getBY patientid 
+export const getImagingProcedurePatient = async (dispatch, pid) => {
+  dispatch(apiCallStart());
+  try {
+    const res = await axios.get(`${baseURL}/labimgpro/getByPid/${pid}`);
+    // console.log(res.data.data);
+    dispatch(getImagingProcedureByPatientSuccess(res.data.data));
     // Alert.alert(res.data.message.code)
     // Alert.alert(pid)
   } catch (error) {

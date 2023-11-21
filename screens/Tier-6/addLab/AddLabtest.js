@@ -134,7 +134,7 @@ const AddLabtest = ({ navigation, route }) => {
 
   const handleSubmit = async () => {
     const rObj = {
-      patientId: item?.id,
+      pid: item?.id,
       collectionType: values[0],
       collectionDateTime: values[1],
       collectionSample: values[2],

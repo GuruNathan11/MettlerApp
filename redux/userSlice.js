@@ -24,6 +24,7 @@ const userSlice = createSlice({
     allergyData: [],
     labtestData: [],
     ProcedureData: [],
+    ImagingProcedureData: [],
     patientVisits: [],
     patientProblem: [],
     immunizationData: [],
@@ -247,10 +248,20 @@ const userSlice = createSlice({
       state.pending = false;
      state.ProcedureData = action.payload;
     },
+    getImagingProcedureDataSuccess: (state, action) => {
+      state.pending = false;
+     state.ImagingProcedureData = action.payload;
+    },
     // procedures 
     getProcedureByPatientSuccess: (state, action) => {
       state.pending = false;
       state.ProcedureData = action.payload;
+    },
+
+    // imagingProcedures
+    getImagingProcedureByPatientSuccess: (state, action) => {
+      state.pending = false;
+      state.ImagingProcedureData = action.payload;
     },
   },
 });
@@ -300,7 +311,9 @@ export const {
   sKeyVerifySuccess,
   getAllergyByPatientSuccess,
   getProcedureByPatientSuccess,
+  getImagingProcedureByPatientSuccess,
   getLabtestSuccess,
   getProcedureDataSuccess,
+  getImagingProcedureDataSuccess,
 } = userSlice.actions;
 export default userSlice.reducer;

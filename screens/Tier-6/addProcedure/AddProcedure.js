@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, Alert, TextInput, Pressable, Text } from 'react-native';
+import { View, FlatList, Alert, TextInput, Pressable, Text, ScrollView } from 'react-native';
 import { styles } from './styles';
 import { Dropdown } from 'react-native-element-dropdown';
 import {
@@ -8,32 +8,28 @@ import {
 } from 'react-native-responsive-screen';
 import { Button, CheckBox, PatientHeader } from '../../../components';
 import {
-   getPatientVisit,
    labpro,
-   getDropdowns,
-   getAllergyNames,
 } from '../../../redux/apiCalls';
-import { ScrollView } from 'react-native-gesture-handler';
-import DatePicker from 'react-native-date-picker';
-import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+// import DatePicker from 'react-native-date-picker';
+// import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector } from 'react-redux';
 
 const AddProcedure = ({ navigation, route }) => {
-  const { item } = route.params;
+  const { patient } = route.params;
   const dispatch = useDispatch();
-  const lastVisitId = useSelector((state) => state.user.lastVisitId);
-  const username = useSelector((state) => state.user.userInfo.username);
-  const Procedure = useSelector((state) => state.user.ProcedureData);
+  // const lastVisitId = useSelector((state) => state.user.lastVisitId);
+  // const username = useSelector((state) => state.user.userInfo.username);
+  // const Procedure = useSelector((state) => state.user.ProcedureData);
   const [observed, setObserved] = useState(true);
   const [historical, setHistorical] = useState(false);
-  const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
-  const [date1, setDate1] = useState(new Date());
-  const [open1, setOpen1] = useState(false);
-  const [enteredDate, setEnteredDate] = useState(null);
-  const [reactDate, setReactDate] = useState(null);
+  // const [date, setDate] = useState(new Date());
+  // const [open, setOpen] = useState(false);
+  // const [date1, setDate1] = useState(new Date());
+  // const [open1, setOpen1] = useState(false);
+  // const [enteredDate, setEnteredDate] = useState(null);
+  // const [reactDate, setReactDate] = useState(null);
   const [comments, setComments] = useState(null);
-  const allergyNames = useSelector((state) => state.user.allergyNames);
+  // const allergyNames = useSelector((state) => state.user.allergyNames);
   
   const [values, setValues] = useState(
     Array(mappedData?.length).fill(null)
@@ -121,11 +117,11 @@ const AddProcedure = ({ navigation, route }) => {
 
   const handleSubmit = async () => {
     const rObj = {
-      patientId: item?.id,
+      pid: patient?.id,
       procedure: values[0],
       urgency: values[1],
       serviceProblem: values[2],
-      // appropriateDate,
+       appropriateDate,
       observed: true,
       consultation: values[3],
       provisionalDiagnosis: values[4],
@@ -152,9 +148,8 @@ const AddProcedure = ({ navigation, route }) => {
     <PatientHeader
       onBack={() => navigation.goBack()}
       patientAge="24 Yrs"
-      patientName={item}
+       patientName={patient?.username}
     />
-  
     <ScrollView
       keyboardShouldPersistTaps="always"
       contentContainerStyle={{
@@ -162,7 +157,6 @@ const AddProcedure = ({ navigation, route }) => {
         alignItems: 'center',
       }}
     >
-     
       {mappedData.slice(0, 4).map((data, index) => (
         <View key={index} style={styles.inputView}>
           <Dropdown
@@ -240,7 +234,7 @@ const AddProcedure = ({ navigation, route }) => {
         />
       </View>
   
-      {mappedData.slice(4, 6).map((data, index) => (
+      {mappedData.slice(4, 8).map((data, index) => (
         <View key={index} style={styles.inputView}>
           <Dropdown
             style={[
@@ -286,7 +280,7 @@ const AddProcedure = ({ navigation, route }) => {
         </View>
       ))}
   
-      {mappedData.slice(6, 8).map((data, index) => (
+      {/* {mappedData.slice(6, 8).map((data, index) => (
         <View key={index} style={styles.inputView}>
           <Dropdown
             style={[
@@ -330,7 +324,7 @@ const AddProcedure = ({ navigation, route }) => {
             }}
           />
         </View>
-      ))}
+      ))} */}
       
       <View style={[styles.inputView]}>
         <TextInput
