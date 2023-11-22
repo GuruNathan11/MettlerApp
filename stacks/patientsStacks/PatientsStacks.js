@@ -33,12 +33,12 @@ import {
   VitalDetails,
   ProcedureDetails,
   ImagingDetails,
-  AddProcedure,
   AddImagingProcedure,
   AddLabtest,
   AddConsult,
   ConsultDetails,
 } from '../../screens';
+import AddProcedure from '../../screens/Tier-6/addProcedure/AddProcedure';
 // import AddProcedure from '../../screens/Tier-6/addProcedure/AddProcedure';
 // import AddImagingProcedure from  '../../screens/Tier-6/AddImaging/AddImagingProcedure';
 // import AddLabtest from '../../screens/Tier-6/addLab/AddLabtest';

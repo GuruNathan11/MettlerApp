@@ -23,6 +23,7 @@ const userSlice = createSlice({
     allShiftStaffs: [],
     allergyData: [],
     labtestData: [],
+    consultData: [],
     ProcedureData: [],
     ImagingProcedureData: [],
     patientVisits: [],
@@ -172,9 +173,9 @@ const userSlice = createSlice({
       state.pending = false;
       state.allergyData = action.payload;
     },
-    getLabtestSuccess: (state, action) => {
+    getConsultSuccess: (state, action) => {
       state.pending = false;
-      state.labtestData = action.payload;
+      state.consultData = action.payload;
     },
     getPatientLastVisitSuccess: (state, action) => {
       state.pending = false;
@@ -248,6 +249,10 @@ const userSlice = createSlice({
       state.pending = false;
      state.ProcedureData = action.payload;
     },
+    getLabtestDataSuccess: (state, action) => {
+      state.pending = false;
+     state.labtestData = action.payload;
+    },
     getImagingProcedureDataSuccess: (state, action) => {
       state.pending = false;
      state.ImagingProcedureData = action.payload;
@@ -262,6 +267,14 @@ const userSlice = createSlice({
     getImagingProcedureByPatientSuccess: (state, action) => {
       state.pending = false;
       state.ImagingProcedureData = action.payload;
+    },
+    getLabTestByPatientSuccess: (state, action) => {
+      state.pending = false;
+      state.labtestData = action.payload;
+    },
+    getConsultByPatientSuccess: (state, action) => {
+      state.pending = false;
+      state.consultData = action.payload;
     },
   },
 });
@@ -312,8 +325,11 @@ export const {
   getAllergyByPatientSuccess,
   getProcedureByPatientSuccess,
   getImagingProcedureByPatientSuccess,
-  getLabtestSuccess,
+  getLabtestDataSuccess,
+  getConsultSuccess,
   getProcedureDataSuccess,
   getImagingProcedureDataSuccess,
+  getLabTestByPatientSuccess,
+  getConsultByPatientSuccess,
 } = userSlice.actions;
 export default userSlice.reducer;

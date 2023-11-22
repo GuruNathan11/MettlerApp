@@ -18,13 +18,20 @@ const LabDetails = ({navigation, route}) => {
   };
   return (
     <View style={styles.container}>
-      <PatientHeader
-        onBack={() => {
-          navigation.goBack();
-        }}
-        // patientName={`${item.problemDescription}`}
-        // patientAge={`${item.dateOfOnset}`}
-      />
+    <PatientHeader
+      onBack={() => navigation.goBack()}
+      patientName={`LabTest Details`}
+      patientAge="24 Yrs"
+    />
+    <View
+      style={{
+        backgroundColor: '#f8fafb',
+        padding: 15,
+        width: '100%',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+      }}
+    />
      
       <ScrollView>
        

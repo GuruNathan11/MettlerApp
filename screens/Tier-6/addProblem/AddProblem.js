@@ -11,7 +11,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {
   getDropdowns,
   getPatientVisit,
-  postAllergy,
   postProblem,
 } from '../../../redux/apiCalls';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -19,6 +18,7 @@ import DatePicker from 'react-native-date-picker';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 const AddProblem = ({navigation, route}) => {
   const {patient} = route.params;
+  const pid = patient?.id;
   const dispatch = useDispatch();
   const lastVisitId = useSelector(state => state.user.lastVisitId);
   const username = useSelector(state => state.user.userInfo.username);
@@ -47,7 +47,7 @@ const AddProblem = ({navigation, route}) => {
     Array(mappedData?.length).fill(false),
   );
   useEffect(() => {
-    getPatientVisit(dispatch, patient.id);
+    getPatientVisit(dispatch, pid);
     getDropdowns(dispatch, 'problemCategory');
     getDropdowns(dispatch, 'immediacy');
     getDropdowns(dispatch, 'ProblemDescription');
@@ -124,7 +124,7 @@ const AddProblem = ({navigation, route}) => {
 
   const handleSubmit = async () => {
     const rObj = {
-      patientId: patient.id,
+      patientId: pid,
       immediacy: values[1],
       dateOfOnset: enteredDate,
       problemCategory: values[0],

@@ -149,7 +149,7 @@ const PatientProblem = ({route}) => {
             marginHorizontal: '2%',
           }}>
           <Text style={{fontSize: 20, textAlign: 'center'}}>
-            We don't have any allergy data for this patient
+            We don't have any patient Problem data for this patient
           </Text>
         </View>
       )}

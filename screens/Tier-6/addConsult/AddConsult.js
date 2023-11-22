@@ -11,7 +11,6 @@ import {
    getPatientVisit,
    labConsult,
    getDropdowns,
-   getAllergyNames,
 } from '../../../redux/apiCalls';
 import { ScrollView } from 'react-native-gesture-handler';
 import DatePicker from 'react-native-date-picker';
@@ -19,7 +18,7 @@ import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector } from 'react-redux';
 
 const AddConsult = ({ navigation, route }) => {
-  const { item } = route.params;
+  const { patient } = route.params;
   const dispatch = useDispatch();
   const lastVisitId = useSelector((state) => state.user.lastVisitId);
   const username = useSelector((state) => state.user.userInfo.username);
@@ -41,7 +40,7 @@ const AddConsult = ({ navigation, route }) => {
   );
 
   useEffect(() => {
-    
+    getPatientVisit(dispatch, patient.id); 
   }, []);
 
   const allergyData = allergyNames.map((item) => ({
@@ -122,12 +121,12 @@ const AddConsult = ({ navigation, route }) => {
 
   const handleSubmit = async () => {
     const rObj = {
-      pid: item?.id,
+      pid: patient?.id,
       speciality: values[0],
       urgency: values[1],
       serviceProblem:values[2],
       appropriateDate:values[8],
-      observed:true ,
+      // observed:true ,
       placeOfConsultation: values[3],
       provisionalDiagnosis:values[4],
       orderedBy: values[5],
@@ -153,7 +152,7 @@ const AddConsult = ({ navigation, route }) => {
     <PatientHeader
       onBack={() => navigation.goBack()}
       patientAge="24 Yrs"
-      patientName={item}
+      patientName={patient?.username}
     />
   
     <ScrollView

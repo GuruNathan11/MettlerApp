@@ -11,6 +11,8 @@ import {
   getAllergyByPatientSuccess,
   getProcedureByPatientSuccess,
   getImagingProcedureByPatientSuccess,
+  getLabTestByPatientSuccess,
+  getConsultByPatientSuccess,
   getAllergyNamesSuccess,
   getAnatomicLocationSuccess,
   getCompletedQ15Success,
@@ -18,7 +20,7 @@ import {
   getImmunizationSuccess,
   getIncompletedQ15Success,
   getLocationSuccess,
-  getUrgencySuccess,
+  // getUrgencySuccess,
   getNatureOfReactionSuccess,
   getPatientAllVisitSuccess,
   getPatientLastVisitSuccess,
@@ -42,7 +44,7 @@ import {
   postQ15EntrySuccess,
   retriveLoginSuccess,
   sKeyVerifySuccess,
-  getprocedureDataSuccess,
+  // getprocedureDataSuccess,
   getUrgencyDataSuccess,
   
 } from './userSlice';
@@ -55,7 +57,7 @@ const baseURL = 'http://web.mettlerhealth.com:7000/api';
 const successCode = 'MHC - 0200';
 
 export const GetOrganization = async dispatch => {
-  // dispatch(apiCallStart());
+  // dispatch(apiCallStart()); 
   // console.log('Hello');
   // console.log(baseURL);
   try {
@@ -619,7 +621,7 @@ export const postImmunization = async (dispatch, rObj) => {
 export const getPatientVisit = async (dispatch, pid) => {
   dispatch(apiCallStart());
   try {
-    const res = await axios.get(`${baseURL}/ptVisit/get/pid/${pid}`);
+    const res = await axios.get(`${baseURL}/visit/ByPid/${pid}`);
     if (res.data?.message.code === successCode) {
       dispatch(getPatientLastVisitSuccess(res.data.data[0].id));
       console.log(res.data.data[0].id);
@@ -757,17 +759,17 @@ export const labTest = async (dispatch, rObj) => {
   }
 };
 // get labtest
-export const getlabTest= async (dispatch, pid) => {
-  dispatch(apiCallStart());
-  try {
-    const res = await axios.get(`${baseURL}/labTest/ById/${pid}`);
-     console.log(res.data.data);
-    dispatch(Success(res.data.data));
-  } catch (error) {
-    console.log(error);
-    dispatch(apiCallError(error.response.data.errorMessage));
-  }
-};
+// export const getlabTest= async (dispatch, pid) => {
+//   dispatch(apiCallStart());
+//   try {
+//     const res = await axios.get(`${baseURL}/labTest/ById/${pid}`);
+//      console.log(res.data.data);
+//     dispatch(Success(res.data.data));
+//   } catch (error) {
+//     console.log(error);
+//     dispatch(apiCallError(error.response.data.errorMessage));
+//   }
+// };
 //labConsult
 export const labConsult = async (dispatch, rObj) => {
   dispatch(apiCallStart());
@@ -808,6 +810,38 @@ export const getImagingProcedurePatient = async (dispatch, pid) => {
     const res = await axios.get(`${baseURL}/labimgpro/getByPid/${pid}`);
     // console.log(res.data.data);
     dispatch(getImagingProcedureByPatientSuccess(res.data.data));
+    // Alert.alert(res.data.message.code)
+    // Alert.alert(pid)
+  } catch (error) {
+    console.log(error);
+    dispatch(apiCallError(error.response.data.errorMessage));
+  }
+};
+
+// getBy LAb test id
+
+export const getLabTestByPatient = async (dispatch, pid) => {
+  dispatch(apiCallStart());
+  try {
+    const res = await axios.get(`${baseURL}/labTest/getByPid/${pid}`);
+    // console.log(res.data.data);
+    dispatch(getLabTestByPatientSuccess(res.data.data));
+    // Alert.alert(res.data.message.code)
+    // Alert.alert(pid)
+  } catch (error) {
+    console.log(error);
+    dispatch(apiCallError(error.response.data.errorMessage));
+  }
+};
+
+// getBy consult id 
+
+export const getConsultByPatient = async (dispatch, pid) => {
+  dispatch(apiCallStart());
+  try {
+    const res = await axios.get(`${baseURL}/labConsult/getByPid/${pid}`);
+    // console.log(res.data.data);
+    dispatch(getConsultByPatientSuccess(res.data.data));
     // Alert.alert(res.data.message.code)
     // Alert.alert(pid)
   } catch (error) {

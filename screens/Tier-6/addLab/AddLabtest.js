@@ -8,10 +8,9 @@ import {
 } from 'react-native-responsive-screen';
 import { Button, CheckBox, PatientHeader } from '../../../components';
 import {
-   getPatientVisit,
     labTest,
-   getDropdowns,
-   getAllergyNames,
+    getPatientVisit,
+    getDropdowns,
 } from '../../../redux/apiCalls';
 import { ScrollView } from 'react-native-gesture-handler';
 import DatePicker from 'react-native-date-picker';
@@ -19,7 +18,7 @@ import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector } from 'react-redux';
 
 const AddLabtest = ({ navigation, route }) => {
-  const { item } = route.params;
+  const { patient } = route.params;
   const dispatch = useDispatch();
   const lastVisitId = useSelector((state) => state.user.lastVisitId);
   const username = useSelector((state) => state.user.userInfo.username);
@@ -134,7 +133,7 @@ const AddLabtest = ({ navigation, route }) => {
 
   const handleSubmit = async () => {
     const rObj = {
-      pid: item?.id,
+      pid: patient?.id,
       collectionType: values[0],
       collectionDateTime: values[1],
       collectionSample: values[2],
@@ -165,7 +164,7 @@ const AddLabtest = ({ navigation, route }) => {
     <PatientHeader
       onBack={() => navigation.goBack()}
       patientAge="24 Yrs"
-      patientName={item}
+      patientName={patient?.username}
     />
   
     <ScrollView

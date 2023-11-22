@@ -1,31 +1,29 @@
-import React from 'react';
+// import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { PatientHeader } from '../../../components';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
 import { styles } from './styles';
-import { useNavigation } from '@react-navigation/native';
-
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import {  getLabTestByPatient } from '../../../redux/apiCalls';
 const LabTest = ({ route }) => {
-  const { item } = route.params;
-
+  const {patient} = route.params;
+  const pid = patient?.id;
+  const dispatch = useDispatch();
+  const labtestData = useSelector(state => state.user.labtestData);
   const navigation = useNavigation();
-
-  
-  const deoxycortiysolData = [
-    '11-deoxycortiysol',
-    '11-deoxycortiysol',
-    '11-deoxycortiysol',
-    '11-deoxycortiysol',
-    '11-deoxycortiysol',
-    '11-deoxycortiysol',
-  ];
-
+  const isFocused = useIsFocused(); // Use useIsFocused hook to check screen focus
+  useEffect(() => {
+    getLabTestByPatient(dispatch, pid);
+  console.log(patient?.username);
+}, [isFocused]);
   return (
     <View style={styles.container}>
       <PatientHeader
         onBack={() => navigation.goBack()}
-        patientName={item?.username}
+        patientName={patient?.username}
         patientAge="24 Yrs"
       />
       <View
@@ -47,7 +45,7 @@ const LabTest = ({ route }) => {
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={() => {
-                 navigation.navigate('AddLabtest', { item });
+                 navigation.navigate('AddLabtest', { patient });
             }}
           >
             <MCIcon name="plus" size={30} color="#020202" />
@@ -57,18 +55,19 @@ const LabTest = ({ route }) => {
 
       <View style={styles.flatList}>
         <FlatList
-          data={deoxycortiysolData}
+          data={labtestData}
+          keyExtractor={item => item.id.toString()}
           showsVerticalScrollIndicator={false}
           renderItem={({ item, index }) => (
             <TouchableOpacity
               activeOpacity={0.8}
               style={styles.pBtn}
               onPress={() => {
-                 navigation.navigate('LabDetails', { item});
+                 navigation.navigate('LabDetails', { item });
               }}
             >
               <View style={styles.patientView}>
-                <Text style={styles.patientName}>{item}</Text>
+                <Text style={styles.patientName}>{item.id}</Text>
                 <View style={styles.arrowView}>
                   <MIcon name="arrow-forward-ios" size={35} color="#8d8d8d" />
                 </View>
