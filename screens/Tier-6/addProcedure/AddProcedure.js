@@ -121,7 +121,7 @@ const AddProcedure = ({ navigation, route }) => {
       procedure: values[0],
       urgency: values[1],
       serviceProblem: values[2],
-       appropriateDate,
+       // appropriateDate,
       observed: true,
       consultation: values[3],
       provisionalDiagnosis: values[4],
