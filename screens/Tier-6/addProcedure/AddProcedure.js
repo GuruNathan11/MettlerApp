@@ -9,6 +9,8 @@ import {
 import { Button, CheckBox, PatientHeader } from '../../../components';
 import {
    labpro,
+   getDropdowns,
+   getPatientVisit,
 } from '../../../redux/apiCalls';
 // import DatePicker from 'react-native-date-picker';
 // import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -38,9 +40,9 @@ const AddProcedure = ({ navigation, route }) => {
     Array(mappedData?.length).fill(false)
   );
 
-  // useEffect(()=>{
-  //   getDropdowns(dispatch,'Urgency')
-  // })
+  useEffect(()=>{
+    getDropdowns(dispatch,'Urgency')
+  })
 
   // const ProcedureData = Procedure.map((item) => ({
   //   label: item.value,
@@ -121,7 +123,7 @@ const AddProcedure = ({ navigation, route }) => {
       procedure: values[0],
       urgency: values[1],
       serviceProblem: values[2],
-       appropriateDate,
+       // appropriateDate,
       observed: true,
       consultation: values[3],
       provisionalDiagnosis: values[4],

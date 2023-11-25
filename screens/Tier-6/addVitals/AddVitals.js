@@ -72,10 +72,10 @@ const AddVitals = ({navigation, route}) => {
     label: item.value,
     value: item.id,
   }));
-  const patientPositionData =patientPosition.map(item => ({
-     label: item.value,
+  const patientPositionData = patientPosition.map(item => ({
+    label: item.value,
     value: item.id,
-   }));
+  }));
 
   const mappedData = [
     {
@@ -87,13 +87,13 @@ const AddVitals = ({navigation, route}) => {
       data: immediacyData,
     },
     {
-    placeholder: 'Origination Date',
+      placeholder: 'Origination Date',
       data: [{label: '20230928', value: '20230928'}],
-     },
+    },
     {
       placeholder: 'Reaction Date/Time',
       data: [{label: '20230928', value: '20230928'}],
-     },
+    },
     {
       placeholder: 'Unit',
       data: descriptionData,
@@ -113,10 +113,10 @@ const AddVitals = ({navigation, route}) => {
         {label: 'Rash', value: 'Rash'},
       ],
     },
-      {
+    {
       placeholder: 'Position',
-       data: patientPositionData,
-     },
+      data: patientPositionData,
+    },
     {
       placeholder: 'Method',
       data: [
@@ -309,4 +309,3 @@ const AddVitals = ({navigation, route}) => {
 };
 
 export default AddVitals;
-

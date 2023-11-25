@@ -51,6 +51,7 @@ import AddProcedure from './Tier-6/addProcedure/AddProcedure';
 import  AddImagingProcedure from './Tier-6/AddImaging/AddImagingProcedure';
 import  AddLabtest from './Tier-6/addLab/AddLabtest';
 import AddConsult from './Tier-6/addConsult/AddConsult';
+import AddAdmit from './Tier-6/AddAdmit/AddAdmit';
 export {
   AdminConfiguration,
   AddAllergy,
@@ -104,5 +105,6 @@ export {
   AddProcedure,
   AddImagingProcedure,
   AddLabtest,
-  AddConsult, 
+  AddConsult,
+  AddAdmit,
 };

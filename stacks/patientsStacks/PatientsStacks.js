@@ -37,6 +37,7 @@ import {
   AddLabtest,
   AddConsult,
   ConsultDetails,
+  AddAdmit,
 } from '../../screens';
 import AddProcedure from '../../screens/Tier-6/addProcedure/AddProcedure';
 // import AddProcedure from '../../screens/Tier-6/addProcedure/AddProcedure';
@@ -98,6 +99,7 @@ const PatientsStacks = () => {
       <Stack.Screen name="AddLabtest" component={AddLabtest} />
       <Stack.Screen name="LabDetails" component={LabDetails} />
       <Stack.Screen name="AddConsult" component={AddConsult} /> 
+      <Stack.Screen name="AddAdmit" component={AddAdmit} /> 
        <Stack.Screen name="ConsultDetails" component={ConsultDetails} />
     </Stack.Navigator>
   );

@@ -256,7 +256,7 @@ const PatientDetails = ({navigation, route}) => {
         </View>
         <View style={{flexDirection: 'row', gap: 30, marginBottom: 15}}>
           <VitalBtn
-            label="Admit Patient"
+            label="Patient ADT"
             img={require('../../../assets/images/admitPatient.png')}
             color="#009933"
             onPress={handleAdmitPatient}

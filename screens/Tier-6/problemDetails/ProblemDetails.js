@@ -46,6 +46,7 @@ const ProblemDetails = ({navigation, route}) => {
         <Card heading="Status :" value={item?.status} />
         <Card heading="Immediacy :" value={item?.immediacy} />
         <Card heading="Clinic :" value={item?.clinic} />
+        <Card heading="Comments :" value={item?.comments} />
         <Card heading="Treatment Factors :" value={item?.treatmentFactors[0]} />
       </ScrollView>
     </View>
