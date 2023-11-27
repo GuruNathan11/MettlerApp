@@ -33,18 +33,13 @@ import {
   VitalDetails,
   ProcedureDetails,
   ImagingDetails,
-  AddImagingProcedure,
-  AddLabtest,
-  AddConsult,
   ConsultDetails,
   AddAdmit,
+  AddTest,
+  AddTest2,
+  AddTest3,
+  AddTest4,
 } from '../../screens';
-import AddProcedure from '../../screens/Tier-6/addProcedure/AddProcedure';
-// import AddProcedure from '../../screens/Tier-6/addProcedure/AddProcedure';
-// import AddImagingProcedure from  '../../screens/Tier-6/AddImaging/AddImagingProcedure';
-// import AddLabtest from '../../screens/Tier-6/addLab/AddLabtest';
-// import AddConsult from '../../screens/Tier-6/addConsult/AddConsult';
-// import ConsultDetails from '../../screens/Tier-6/ConsultDetails/ConsultDetails';
 const Stack = createNativeStackNavigator();
 const PatientsStacks = () => {
   return (
@@ -92,15 +87,16 @@ const PatientsStacks = () => {
       <Stack.Screen name="AddProblem" component={AddProblem} />
       <Stack.Screen name="AddImmunization" component={AddImmunization} />
       <Stack.Screen name="AddVitals" component={AddVitals} />
-      <Stack.Screen name="AddProcedure" component={AddProcedure} />
+      <Stack.Screen name="AddProcedure" component={AddTest} />
       <Stack.Screen name="ProcedureDetails" component={ProcedureDetails} />
-      <Stack.Screen name="AddImagingProcedure" component={AddImagingProcedure} />
+      <Stack.Screen name="AddTest2" component={AddTest2} />
       <Stack.Screen name="ImagingDetails" component={ImagingDetails} />
-      <Stack.Screen name="AddLabtest" component={AddLabtest} />
+      <Stack.Screen name="AddTest3" component={AddTest3} />
       <Stack.Screen name="LabDetails" component={LabDetails} />
-      <Stack.Screen name="AddConsult" component={AddConsult} /> 
+      <Stack.Screen name="AddTest4" component={AddTest4} /> 
       <Stack.Screen name="AddAdmit" component={AddAdmit} /> 
-       <Stack.Screen name="ConsultDetails" component={ConsultDetails} />
+      <Stack.Screen name="ConsultDetails" component={ConsultDetails} />
+
     </Stack.Navigator>
   );
 };

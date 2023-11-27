@@ -48,6 +48,7 @@ const Q15 = ({navigation, route}) => {
   const {q15Load, q15Location, q15Activity} = useSelector(state => state.user);
   const LocationData = q15Location ? [q15Location] : [];
   const ActivityData = q15Activity ? [q15Activity] : [];
+  
 
   const transformedLocationData = useMemo(() => {
     return LocationData[0]
@@ -96,7 +97,7 @@ const Q15 = ({navigation, route}) => {
   const q15Date = qYear + qMonth + qDate;
   const stamp = `${q15Time}-${q15Time.slice(0, 2)}${parseInt(boxNo) + 15}`;
   const pid = patient.id;
-
+  
   useEffect(() => {
     getQ15Config(dispatch, patient.id, q15Date);
   }, [q15Load, q15Date]);

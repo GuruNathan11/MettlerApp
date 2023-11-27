@@ -47,7 +47,7 @@ const Consult = ({ route }) => {
             activeOpacity={0.8}
             onPress={() => {
               // navigation.navigate('ProcedureDetails', {item});
-                  navigation.navigate('AddConsult', { patient });
+                  navigation.navigate('AddTest4', { patient });
             }}
           >
             <MCIcon name="plus" size={30} color="#020202" />

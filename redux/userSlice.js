@@ -29,7 +29,7 @@ const userSlice = createSlice({
     patientVisits: [],
     patientProblem: [],
     immunizationData: [],
-    allergyNames: [],
+    allergyName: [],
     natureOfReactions: [],
     symptoms: [],
     problemCategory: [],

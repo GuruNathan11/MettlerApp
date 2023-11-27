@@ -47,7 +47,7 @@ const ImagingProcedure = ({route}) => {
             activeOpacity={0.8}
             onPress={() => {
               // navigation.navigate('ProcedureDetails', {item});
-                 navigation.navigate('AddImagingProcedure', { patient });
+                 navigation.navigate('AddTest2', { patient });
             }}
           >
             <MCIcon name="plus" size={30} color="#020202" />
@@ -71,7 +71,7 @@ const ImagingProcedure = ({route}) => {
             >
               
               <View style={styles.patientView}>
-                <Text style={styles.patientName}>{item.reasonForStudy}</Text>
+                <Text style={styles.patientName}>{item.imagingType}</Text>
                 <View style={styles.arrowView}>
                   <MIcon name="arrow-forward-ios" size={35} color="#8d8d8d" />
                 </View>

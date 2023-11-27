@@ -8,15 +8,11 @@ import {
 } from 'react-native-responsive-screen';
 import {Button, CheckBox, PatientHeader} from '../../../components';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-  getDropdowns,
-  getPatientVisit,
-  labpro,
-} from '../../../redux/apiCalls';
+import {getDropdowns, getPatientVisit, labTest,} from '../../../redux/apiCalls';
 import {ScrollView} from 'react-native-gesture-handler';
 import DatePicker from 'react-native-date-picker';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-const AddTest = ({navigation, route}) => {
+const AddTest3 = ({navigation, route}) => {
   const {patient} = route.params;
   const dispatch = useDispatch();
   const lastVisitId = useSelector(state => state.user.lastVisitId);
@@ -49,86 +45,102 @@ const AddTest = ({navigation, route}) => {
 
   const mappedData = [
     {
-      placeholder: 'Procedure',
+      placeholder: 'Lab Test',
       data: [
-        { label: 'Normal', value: 'Normal' },
-        { label: 'Mild', value: 'Mild' },
-        { label: 'Severe', value: 'Severe' },
+        {label: 'Normal', value: 'Normal'},
+        {label: 'Mild', value: 'Mild'},
+        {label: 'Severe', value: 'Severe'},
+      ],
+    },
+    {
+      placeholder: 'Collection Type',
+      data: UrgencyData,
+    },
+    {
+      placeholder: 'Collection Sample',
+      data: [
+        {label: 's', value: 's'},
+        {label: 'w', value: 'w'},
+        {label: 'v', value: 'v'},
+      ],
+    },
+    {
+      placeholder: 'Specimen',
+      data: [
+        {label: 'm', value: 'm'},
+        {label: 's', value: 's'},
+        {label: 'k', value: 'k'},
       ],
     },
     {
       placeholder: 'Urgency',
-      data: UrgencyData,
-    },
-    {
-      placeholder: 'Service to problem this procedure',
       data: [
-        { label: 's', value: 's' },
-        { label: 'w', value: 'w' },
-        { label: 'v', value: 'v' },
+        {label: 'x', value: 'x'},
+        {label: 'y', value: 'y'},
+        {label: 'z', value: 'z'},
       ],
     },
     {
-        placeholder: 'Provisional Diagnosis',
-        data:  [
-            { label: 'm', value: 'm' },
-            { label: 's', value: 's' },
-            { label: 'k', value: 'k' },
-          ],
-        },
-    {
-      placeholder: 'Place of Consultation',
-      data:  [
-        { label: 'x', value: 'x' },
-        { label: 'y', value: 'y' },
-        { label: 'z', value: 'z' },
-      ],
-    },  
-    {
-      placeholder: 'Ordered by',
+      placeholder: 'How Often',
       data: [
-        { label: 'h', value: 'h' },
-        { label: 'd', value: 'd' },
-        { label: 'c', value: 'c' },
+        {label: 'h', value: 'h'},
+        {label: 'd', value: 'd'},
+        {label: 'c', value: 'c'},
       ],
     },
     {
-      placeholder: 'Entered by',
+      placeholder: 'How Long',
       data: [
-        { label: 'l', value: 'l' },
-        { label: 'd', value: 'd' },
-        { label: 'e', value: 'e' },
+        {label: 'l', value: 'l'},
+        {label: 'd', value: 'd'},
+        {label: 'e', value: 'e'},
       ],
     },
+      {
+        placeholder: 'Ordered by',
+        data: [
+          {label: 'l', value: 'l'},
+          {label: 'd', value: 'd'},
+          {label: 'e', value: 'e'},
+        ],
+      },
+      {
+        placeholder: 'Entered by',
+        data: [
+          {label: 'l', value: 'l'},
+          {label: 'd', value: 'd'},
+          {label: 'e', value: 'e'},
+        ],
+      },
   ];
 
   const handleSubmit = async () => {
-    const rObj = {
-      pid: patient?.id,
-      procedure: values[0],
-      urgency: values[1],
-      serviceProblem: values[2],
-       // appropriateDate,
-      // observed: true,
-      consultation: values[3],
-      provisionalDiagnosis: values[4],
-      orderedBy: values[5],
-      enteredBy: values[6],
-      comments: comments,
-    };
-    if (values.length > 4) {
-     labpro(dispatch, rObj)
-        .then(() => {
-          setValues(Array(mappedData?.length).fill(null));
-          setComments(null);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      Alert.alert('METTLER HEALTH CARE', 'Select all fields');
-    }
-  };
+        const rObj = {
+          pid: patient?.id,
+          collectionType: values[0],
+          collectionDateTime: values[1],
+          collectionSample: values[2],
+          specimen:values[3],
+          urgency: values[4],
+          howOften: values[5],
+          howLong: values[6],
+          orderedBy: values[7],
+          enteredBy: values[8],
+          comments: comments,
+        };
+        if (values.length > 4) {
+            labTest(dispatch, rObj)
+            .then(() => {
+              setValues(Array(mappedData?.length).fill(null));
+              setComments(null);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          Alert.alert('METTLER HEALTH CARE', 'Select all fields');
+        }
+      };
   return (
     <View style={styles.container}>
       <PatientHeader
@@ -243,7 +255,7 @@ const AddTest = ({navigation, route}) => {
                     .padStart(
                       2,
                       '0',
-                    )}.${date?.getFullYear()} (Origination Date)`}
+                    )}.${date?.getFullYear()} (Earliest appropriate date)`}
               </Text>
               <MCIcon name="calendar-edit" size={30} color="#8d8d8d" />
             </Pressable>
@@ -351,4 +363,4 @@ const AddTest = ({navigation, route}) => {
   );
 };
 
-export default AddTest;
+export default AddTest3;

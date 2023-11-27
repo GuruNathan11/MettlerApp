@@ -47,11 +47,14 @@ import ProcedureDetails from './Tier-6/ProcedureDetails/ProcedureDetails';
 import ImagingDetails from './Tier-6/ImagingDetails/ImagingDetails';
 import LabDetails from './Tier-6/LabDetails/LabDetails';
 import ConsultDetails from './Tier-6/ConsultDetails/ConsultDetails';
-import AddProcedure from './Tier-6/addProcedure/AddProcedure';
-import  AddImagingProcedure from './Tier-6/AddImaging/AddImagingProcedure';
-import  AddLabtest from './Tier-6/addLab/AddLabtest';
-import AddConsult from './Tier-6/addConsult/AddConsult';
+import AddTest from './Tier-6/addProcedure/AddTest';
+// import  AddImagingProcedure from './Tier-6/AddImaging/AddImagingProcedure';
+// import  AddLabtest from './Tier-6/addLab/AddLabtest';
+import AddTest3 from './Tier-6/addLab/AddTest3';
+// import AddConsult from './Tier-6/addConsult/AddConsult';
 import AddAdmit from './Tier-6/AddAdmit/AddAdmit';
+import AddTest2 from './Tier-6/AddImaging/AddTest2';
+import AddTest4 from './Tier-6/addConsult/AddTest4';
 export {
   AdminConfiguration,
   AddAllergy,
@@ -102,9 +105,13 @@ export {
   ImagingDetails,
   LabDetails,
   ConsultDetails,
-  AddProcedure,
-  AddImagingProcedure,
-  AddLabtest,
-  AddConsult,
+  // AddProcedure,
+  // AddImagingProcedure,
+  // AddLabtest,
+  // AddConsult,
   AddAdmit,
+  AddTest,
+  AddTest2,
+  AddTest3,
+  AddTest4,
 };

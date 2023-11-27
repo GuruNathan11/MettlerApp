@@ -76,7 +76,7 @@ const Procedure = ({route}) => {
                 navigation.navigate('ProcedureDetails', {item});
               }}>
               <View style={styles.patientView}>
-                <Text style={styles.patientName}>{item.urgency}</Text>
+                <Text style={styles.patientName}>{item.procedure}</Text>
                 <View style={styles.arrowView}>
                   <MIcon name="arrow-forward-ios" size={35} color="#8d8d8d" />
                 </View>

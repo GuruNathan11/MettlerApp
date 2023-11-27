@@ -45,7 +45,7 @@ const LabTest = ({ route }) => {
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={() => {
-                 navigation.navigate('AddLabtest', { patient });
+                 navigation.navigate('AddTest3', { patient });
             }}
           >
             <MCIcon name="plus" size={30} color="#020202" />

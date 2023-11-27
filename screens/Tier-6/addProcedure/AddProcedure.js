@@ -9,7 +9,6 @@ import {
 import { Button, CheckBox, PatientHeader } from '../../../components';
 import {
    labpro,
-   getDropdowns,
    getPatientVisit,
 } from '../../../redux/apiCalls';
 // import DatePicker from 'react-native-date-picker';
@@ -41,7 +40,7 @@ const AddProcedure = ({ navigation, route }) => {
   );
 
   useEffect(()=>{
-    getDropdowns(dispatch,'Urgency')
+    // getDropdowns(dispatch,'Urgency')
   })
 
   // const ProcedureData = Procedure.map((item) => ({
@@ -61,58 +60,50 @@ const AddProcedure = ({ navigation, route }) => {
     {
       placeholder: 'Urgency',
       data: [
-        { label: 'Normal', value: 'Normal' },
-        { label: 'Mild', value: 'Mild' },
-        { label: 'Severe', value: 'Severe' },
+        { label: 'Blood', value: 'Blood' },
+        { label: 'o', value: 'o' },
+        { label: 'p', value: 'p' },
       ],
     },
     {
       placeholder: 'Service to problem this procedure',
       data: [
-        { label: 'Normal', value: 'Normal' },
-        { label: 'Mild', value: 'Mild' },
-        { label: 'Severe', value: 'Severe' },
+        { label: 's', value: 's' },
+        { label: 'w', value: 'w' },
+        { label: 'v', value: 'v' },
       ],
     },
-    {
-      placeholder: 'Earliest appropriate date',
-      data: [
-        { label: 'Normal', value: 'Normal' },
-        { label: 'Mild', value: 'Mild' },
-        { label: 'Severe', value: 'Severe' },
-      ],
-    },
-    
+   
     {
       placeholder: 'Place of Consultation',
       data:  [
-        { label: 'Normal', value: 'Normal' },
-        { label: 'Mild', value: 'Mild' },
-        { label: 'Severe', value: 'Severe' },
+        { label: 'm', value: 'm' },
+        { label: 's', value: 's' },
+        { label: 'k', value: 'k' },
       ],
     },
     {
         placeholder: 'Provisional Diagnosis',
         data:  [
-          { label: 'Normal', value: 'Normal' },
-          { label: 'Mild', value: 'Mild' },
-          { label: 'Severe', value: 'Severe' },
+          { label: 'x', value: 'x' },
+          { label: 'y', value: 'y' },
+          { label: 'z', value: 'z' },
         ],
       },  
       {
         placeholder: 'Ordered by',
         data: [
-          { label: 'Normal', value: 'Normal' },
-          { label: 'Mild', value: 'Mild' },
-          { label: 'Severe', value: 'Severe' },
+          { label: 'h', value: 'h' },
+          { label: 'd', value: 'd' },
+          { label: 'c', value: 'c' },
         ],
       },
       {
         placeholder: 'Entered by',
         data: [
-          { label: 'Normal', value: 'Normal' },
-          { label: 'Mild', value: 'Mild' },
-          { label: 'Severe', value: 'Severe' },
+          { label: 'l', value: 'l' },
+          { label: 'd', value: 'd' },
+          { label: 'e', value: 'e' },
         ],
       },
   ];
@@ -124,7 +115,7 @@ const AddProcedure = ({ navigation, route }) => {
       urgency: values[1],
       serviceProblem: values[2],
        // appropriateDate,
-      observed: true,
+      // observed: true,
       consultation: values[3],
       provisionalDiagnosis: values[4],
       orderedBy: values[5],

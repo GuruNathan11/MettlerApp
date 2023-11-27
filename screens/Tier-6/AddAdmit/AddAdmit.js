@@ -10,8 +10,8 @@ import {
   } from 'react-native-responsive-screen';
 import { Dropdown } from 'react-native-element-dropdown';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { getPatientVisit } from '../../../redux/apiCalls';
-import { useDispatch, useSelector } from 'react-redux';
+import { getDropdowns, getPatientVisit } from '../../../redux/apiCalls';
+import { useDispatch } from 'react-redux';
 
 const AddAdmit = ({navigation, route}) => {
   const {patient} = route.params;
@@ -29,7 +29,12 @@ const AddAdmit = ({navigation, route}) => {
   );
   useEffect(() => {
     getPatientVisit(dispatch, patient.id);
+    getDropdowns(dispatch, 'Urgency');
   }, []);
+  const UrgencyData = Urgency.map(item => ({
+    label: item.value,
+    value: item.id,
+  }));
 
   const mappedData = [
     {
@@ -42,11 +47,7 @@ const AddAdmit = ({navigation, route}) => {
     },
     {
       placeholder: 'Attending Phyician',
-      data: [
-        {label: 'Normal', value: 'Normal'},
-        {label: 'Mild', value: 'Mild'},
-        {label: 'Severe', value: 'Severe'},
-      ],
+        data: UrgencyData,
     },
     {
       placeholder: 'Facility Treating Speciality',
@@ -72,14 +73,6 @@ const AddAdmit = ({navigation, route}) => {
         {label: 'Severe', value: 'Severe'},
       ],
     },
-    {
-        placeholder: 'Bed Number',
-        data: [
-          {label: 'Normal', value: 'Normal'},
-          {label: 'Mild', value: 'Mild'},
-          {label: 'Severe', value: 'Severe'},
-        ],
-      },
       {
         placeholder: 'Brief Description',
         data: [
@@ -143,7 +136,7 @@ const AddAdmit = ({navigation, route}) => {
         patientName="Admit Patient"
         patientAge="24 Yrs"
       />
- <ScrollView
+  <ScrollView
           keyboardShouldPersistTaps="always"
           contentContainerStyle={{
             width: wp(100),
