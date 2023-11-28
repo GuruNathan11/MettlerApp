@@ -84,10 +84,17 @@ const Q15StaffConfiguration = () => {
             setOpen(true);
           }}>
           <CalendarDate
-            date={<MCIcon name="calendar-search" size={35} />}
+            day={
+              <>
+                <MCIcon name="calendar-search" size={15} />
+                <Text>
+                  {date.toLocaleString('default', {month: 'short'}).slice(0, 3)}
+                </Text>
+              </>
+            }
+            date={date.getDate()}
             bgColor={selectedDateIndex > 5 ? '#2e6aea' : '#2e6aea'}
             textColor={'#fff'}
-            noLine
           />
         </TouchableOpacity>
         <DatePicker

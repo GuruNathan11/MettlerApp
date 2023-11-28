@@ -17,6 +17,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SecretKey = ({navigation}) => {
   const [enteredOtp, setEnteredOtp] = useState('');
+  const [length, setlength] = useState('');
   const {pending} = useSelector(state => state.user);
   const retrive = useSelector(state => state.user.retrive);
   const errorMsg = useSelector(state => state.user.error);
@@ -79,10 +80,10 @@ const SecretKey = ({navigation}) => {
         />
         <Text style={styles.subText}>Enter Your Passcode</Text>
 
-        <OtpBox length={6} onOtpChange={handleOtpChange} />
+        <OtpBox length={6} onOtpChange={handleOtpChange} secureTextEntry={enteredOtp.length < 6}/>
         <TouchableOpacity
           style={styles.btnView}
-          activeOpacity={0.7}
+          activeOpacity={1.5}
           onPress={handleSecretKey}>
           <Text style={styles.btnText}>Login</Text>
         </TouchableOpacity>

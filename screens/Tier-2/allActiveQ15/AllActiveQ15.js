@@ -283,9 +283,11 @@ const AllActiveQ15 = ({navigation}) => {
         setValue('');
         setValue1('');
         setOk(false);
+        setText('');
         setBreathCHeck(true);
         setNotesCheck(false);
-        alert('Data Saved');
+        
+        Alert.alert('Data Saved');
         setComplete(!complete);
       } else {
         alert('Please select the options');

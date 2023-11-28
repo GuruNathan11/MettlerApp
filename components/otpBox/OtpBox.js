@@ -38,7 +38,7 @@ const OtpBox = ({length = 6, onOtpChange}) => {
       {otp.map((value, index) => (
         <TextInput
           key={index}
-          // secureTextEntry
+           secureTextEntry
           style={[styles.otpBox, value !== '' && styles.otpBoxFilled]}
           value={value}
           onChangeText={text => handleOtpChange(index, text)}

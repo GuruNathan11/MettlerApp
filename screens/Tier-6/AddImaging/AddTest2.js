@@ -166,16 +166,22 @@ const AddTest2 = ({navigation, route}) => {
         onBack={() => navigation.goBack()}
         patientAge="24 Yrs"
         patientName={patient.username}
-      />
+      />   
+          <View style={{ alignItems: 'center', width: '100%' }}>
+        <Text style={{ fontWeight: 'bold', textAlign: 'center', color: '#000', fontSize:19 }}>
+          Pregnant
+         </Text>
+       </View>
       <View
         style={{
           flexDirection: 'row',
           justifyContent: 'space-around',
           width: '100%',
-        }}>
+        }}
+      >
         <CheckBox
           circled
-          label="Observed"
+          label="Yes"
           checked={observed}
           onPress={() => {
             setObserved(true);
@@ -184,7 +190,16 @@ const AddTest2 = ({navigation, route}) => {
         />
         <CheckBox
           circled
-          label="Historical"
+          label="No"
+          checked={historical}
+          onPress={() => {
+            setHistorical(true);
+            setObserved(false);
+          }}
+        />
+          <CheckBox
+          circled
+          label="Unknown"
           checked={historical}
           onPress={() => {
             setHistorical(true);
