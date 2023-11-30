@@ -1,8 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
+import { StyleSheet } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -22,5 +20,13 @@ export const styles = StyleSheet.create({
   input: {
     fontSize: hp(2.5),
     width: '90%',
+  },
+  boxContainer: {
+    backgroundColor: '#DEE4EA',
+    width: wp(90),
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 20,
+    marginVertical: 20
   },
 });

@@ -46,15 +46,6 @@ const PatientDataComponent = ({navigation, patient}) => {
               style={styles.pBtn}
               onPress={() => navigation.navigate(item.destination, {patient})}>
               <View style={styles.patientView}>
-                {/* <View
-                  style={{
-                    backgroundColor: item.bg,
-                    padding: 9,
-                    borderRadius: 20,
-                  }}>
-                  <MCIcon name={item.mIcon} size={30} color={item.color} />
-                </View> */}
-
                 <Image source={item.mIcon} style={{width: 60, height: 60}} />
                 <View style={styles.nameView}>
                   <Text style={styles.patientName}>{item.name}</Text>

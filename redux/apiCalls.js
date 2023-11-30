@@ -20,7 +20,7 @@ import {
   getImmunizationSuccess,
   getIncompletedQ15Success,
   getLocationSuccess,
-  // getUrgencySuccess,
+   getUrgencySuccess,
   getNatureOfReactionSuccess,
   getPatientAllVisitSuccess,
   getPatientLastVisitSuccess,
@@ -404,14 +404,7 @@ export const getShiftTimes = async dispatch => {
     if (res.data.data) {
       dispatch(getShiftStartTimesSuccess(res.data.data.shift.startTime));
       dispatch(getShiftDurationSuccess(res.data.data.shift.duration));
-      // await AsyncStorage.setItem(
-      //   'shiftDuration',
-      //   res.data.data.organization.shift.duration,
-      // );
-      // await AsyncStorage.setItem(
-      //   'shiftStartTime',
-      //   res.data.data.organization.shift.startTime,
-      // );
+      
     }
   } catch (error) {
     console.log(error);
@@ -846,6 +839,25 @@ export const getConsultByPatient = async (dispatch, pid) => {
     // Alert.alert(pid)
   } catch (error) {
     console.log(error);
+    dispatch(apiCallError(error.response.data.errorMessage));
+  }
+};
+
+//admit patient
+export const postAdmit= async (dispatch, rObj) => {
+  dispatch(apiCallStart());
+  try {
+    const res = await axios.post(`${baseURL}/admit/add`, rObj);
+    if (res.data?.message.code === successCode) {
+      Alert.alert('METTLER HEALTH CARE', 'admit Added Successfully');
+      dispatch(apiCallSuccess());
+    } else {
+      Alert.alert('METTLER HEALTH CARE', res.data.message.description);
+    }
+  } catch (error) {
+    console.log(error);
+    console.log(rObj);
+     Alert.alert(error);
     dispatch(apiCallError(error.response.data.errorMessage));
   }
 };

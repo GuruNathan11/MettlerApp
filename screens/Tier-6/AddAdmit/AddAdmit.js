@@ -1,28 +1,38 @@
-import {View, Text, Pressable} from 'react-native';
+import {View, Text, Pressable, FlatList,TextInput, Alert} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import {styles} from './styles';
-import {Button, PatientHeader} from '../../../components';
+import { PatientHeader, CheckBox, Button} from '../../../components';
 import DatePicker from 'react-native-date-picker';
-import { FlatList, ScrollView, TextInput } from 'react-native-gesture-handler';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
   } from 'react-native-responsive-screen';
-import { Dropdown } from 'react-native-element-dropdown';
+  import {
+       getPatientVisit,
+       postAdmit,
+       getDropdowns,
+    } from '../../../redux/apiCalls';
+import {Dropdown, MultiSelect}from 'react-native-element-dropdown';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { getDropdowns, getPatientVisit } from '../../../redux/apiCalls';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const AddAdmit = ({navigation, route}) => {
   const {patient} = route.params;
   const dispatch = useDispatch();
-
+  const lastVisitId = useSelector(state => state.user.lastVisitId);
+  const username = useSelector(state => state.user.userInfo.username);
   const [reactDate, setReactDate] = useState(null);
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
+  const [observed, setObserved] = useState(true);
+  const [historical, setHistorical] = useState(false);
   const [date1, setDate1] = useState(new Date());
   const [open1, setOpen1] = useState(false);
+  const [comments, setComments] = useState(null);
+  const [enteredDate, setEnteredDate] = useState(null);
   const [values, setValues] = useState(Array(mappedData?.length).fill(null));
+  const Urgency = useSelector(state => state.user.location);
   
   const [isFocusArray, setIsFocusArray] = useState(
     Array(mappedData?.length).fill(false),
@@ -90,7 +100,7 @@ const AddAdmit = ({navigation, route}) => {
         ],
       }, 
       {
-        placeholder: 'Primary',
+        placeholder: 'Primary Physician',
         data: [
           {label: 'Normal', value: 'Normal'},
           {label: 'Mild', value: 'Mild'},
@@ -98,21 +108,27 @@ const AddAdmit = ({navigation, route}) => {
         ],
       }, 
   ];
+  const handleBeaconDevices = () => {
+    // Functionality related to beacon devices
+    // Add your logic here
+    // For example, you can navigate to another screen or perform some action
+    Alert.alert('Beacon Devices', 'Button Pressed for Beacon Devices');
+  };
 
   const handleSubmit = async () => {
     const rObj = {
-      id: '',
       pid: patient?.id,
-      admissionType: values[1],
-      attendingPhysician,
-      primaryPhysician: '',
-      facilityTreatingSpeciality: [values[4]],
-      sourcefAdmission: values[3],
-      wardLocation: values[2],
-      bedId: '105-01',
+      admissionType: values[0],
+      attendingPhysician: values[1],
+      primaryPhysician: values[2],
+      facilityTreatingSpeciality: values[3],
+      sourcefAdmission: values[4],
+      wardLocation: values[5],
+      // bedId: '105-01',
       admissionDate: reactDate,
-      trackingDevice: false,
-      briefDescription: 'comments',
+      // trackingDevice: false,
+      briefDescription: values[6],
+      comments: comments,
     };
     if (values.length > 4) {
       postAdmit(dispatch, rObj)
@@ -128,7 +144,7 @@ const AddAdmit = ({navigation, route}) => {
     }
   };
   return (
-    <View>
+    <View style={styles.container}>
       <PatientHeader
         onBack={() => {
           navigation.goBack();
@@ -136,13 +152,43 @@ const AddAdmit = ({navigation, route}) => {
         patientName="Admit Patient"
         patientAge="24 Yrs"
       />
-  <ScrollView
+       <View style={{ alignItems: 'center', width: '100%' }}>
+        <Text style={{ fontWeight: 'bold', textAlign: 'center', color: '#000', fontSize:19 }}>
+          Assign a tracking Device to patient?
+         </Text>
+       </View>
+    <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          width: '100%',
+        }}>
+        <CheckBox
+          circled
+          label="Yes"
+          checked={observed}
+          onPress={() => {
+            setObserved(true);
+            setHistorical(false);
+          }}
+        />
+        <CheckBox
+          circled
+          label="No"
+          checked={historical}
+          onPress={() => {
+            setHistorical(true);
+            setObserved(false);
+          }}
+        />
+      </View>
+      {observed ? (
+        <ScrollView
+        // style={{ flex: 1 }}
           keyboardShouldPersistTaps="always"
           contentContainerStyle={{
             width: wp(100),
             alignItems: 'center',
-            // flex: 1,
-            //   justifyContent: 'center',
           }}>
           <FlatList
             scrollEnabled={false}
@@ -199,41 +245,9 @@ const AddAdmit = ({navigation, route}) => {
               </View>
             )}
           />
-          <View style={[styles.inputView]}>
-            <Pressable
-              onPress={() => setOpen(true)}
-              style={{
-                width: '100%',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}>
-
-              <MCIcon name="calendar-edit" size={30} color="#8d8d8d" />
-            </Pressable>
-            <DatePicker
-              modal
-              mode="date"
-              textColor="#0f3995"
-              open={open}
-              date={date}
-              onConfirm={date => {
-                setOpen(false);
-                setDate(date);
-                setEnteredDate(
-                  `${date?.getFullYear()}${parseInt(date?.getMonth() + 1)
-                    .toString()
-                    .padStart(2, '0')}${date
-                    ?.getDate()
-                    .toString()
-                    .padStart(2, '0')}`,
-                );
-              }}
-              onCancel={() => {
-                setOpen(false);
-              }}
-            />
-          </View>
+         
+          
+       
           <View style={[styles.inputView]}>
             <Pressable
               onPress={() => setOpen1(true)}
@@ -244,7 +258,7 @@ const AddAdmit = ({navigation, route}) => {
                 alignItems: 'center',
               }}>
               <Text>
-                {date1 &&
+                {/* {date1 &&
                   `${date1?.getDate().toString().padStart(2, '0')}.${parseInt(
                     date1?.getMonth() + 1,
                   )
@@ -252,7 +266,8 @@ const AddAdmit = ({navigation, route}) => {
                     .padStart(
                       2,
                       '0',
-                    )}.${date1?.getFullYear()} (Reaction Date/Time)`}
+                    )}.${date1?.getFullYear()} (Admission Date & Time)`} */}
+                      Admission Date & Time
               </Text>
               <MCIcon name="calendar-edit" size={30} color="#8d8d8d" />
             </Pressable>
@@ -280,15 +295,43 @@ const AddAdmit = ({navigation, route}) => {
             />
           </View>
           <View style={[styles.inputView]}>
-          
-            
+            <TextInput
+              style={styles.input}
+              placeholder="Add Comment"
+              value={comments}
+              onChangeText={text => {
+                setComments(text);
+              }}
+            />
           </View>
+          <View style={styles.boxContainer}>
+  {/* Your box content goes here */}
+  <Pressable
+            style={{
+              backgroundColor: '#D7DEE5',
+              padding: 10,
+              borderRadius: 5,
+              alignItems: 'center',
+              flexDirection: 'row',  
+              // marginBottom: 10,
+            }}
+            onPress={handleBeaconDevices}
+          >
+             <MCIcon name="qrcode-scan" size={20} color="#000" />
+            <Text style={{ color: '#000', fontSize: 16, marginLeft: 5 }}>Beacon Devices</Text>
+          </Pressable>
+</View>
+    
         </ScrollView>
-      <View
+      ) : (
+        <Text>Hello</Text>
+      )}
+
+    <View
         style={{
           flexDirection: 'row',
           gap: 20,
-          marginRight: '3%',
+          marginHorizontal: '3%',
           marginBottom: '8%',
           justifyContent: 'flex-end',
         }}>

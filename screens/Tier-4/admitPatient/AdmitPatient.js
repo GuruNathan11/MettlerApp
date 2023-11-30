@@ -23,49 +23,42 @@ const AdmitPatient = ({navigation, route}) => {
   const menuData = [
     {
       name: 'Patient ADT',
-        // color: 'green',
-      //   bg: '#FDF6F8',
-      mIcon: require('../../../assets/images/procedure.png'),
+      color: '#E4FDFE',
+      bg: '##E4FDFE',
+      mIcon: require('../../../assets/images/Vector3.png'),
       destination: '',
     },
     {
       name: 'Admit',
-      //   color: '#3972ED',
-      //   bg: '#E9F1FD',
+        color: '#3972ED',
+        bg: '#FDF6F8',
       mIcon: require('../../../assets/images/plus.png'),
       destination: 'AddAdmit',
     },
     {
       name: 'Bed Assignment',
-        // color: '#3972ED',
-      //   bg: '#FCF6F0',
-      mIcon: require('../../../assets/images/plus.png'),
+        color: '#3972ED',
+        bg: '#E9F1FD',
+      mIcon: require('../../../assets/images/plus2.png'),
       destination: '',
     },
     {
       name: 'Transfer',
-      //   color: '#6BB4A6',
-      //   bg: '#EBF9EB',
-      mIcon: require('../../../assets/images/plus2.png'),
+        color: '#6BB4A6',
+        bg: '#FCF6F0',
+      mIcon: require('../../../assets/images/clipboard.png'),
       destination: '',
     },
     {
       name: 'Discharge',
-      //   color: '#6BB4A6',
-      //   bg: '#EBF9EB',
-      mIcon: require('../../../assets/images/plus2.png'),
+        color: '#6BB4A6',
+        bg: '#EBF9EB',
+      mIcon: require('../../../assets/images/clipboard(2).png'),
       destination: '',
     },
   ];
   return (
     <View style={{backgroundColor: '#fff', width: '100%', height: '100%'}}>
-      <PatientHeader
-        onBack={() => {
-          navigation.goBack();
-        }}
-        patientName={patient?.username}
-        patientAge="24 Yrs"
-      />
       <View style={styles.flatList}>
         <FlatList
           data={menuData}
@@ -76,12 +69,12 @@ const AdmitPatient = ({navigation, route}) => {
               style={styles.pBtn}
               onPress={() => navigation.navigate(item.destination, {patient})}>
               <View style={styles.patientView}>
-
                 <Image source={item.mIcon} style={{width: 60, height: 60}} />
                 <View style={styles.nameView}>
                   <Text style={styles.patientName}>{item.name}</Text>
                 </View>
                 <View style={styles.arrowView}>
+                  {/* <Text style={styles.arrow}>＞</Text> */}
                   <MIcon name="arrow-forward-ios" size={25} color="#8d8d8d" />
                 </View>
               </View>
