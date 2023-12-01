@@ -19,7 +19,6 @@ import Tabs from './tabs/Tabs';
 import VitalBtn from './vitalBtn/VitalBtn';
 import VitalBtnHorizontal from './vitalBtnHorizontal/VitalBtnHorizontal';
 import VitalBtnVertical from './vitalBtnVertical/VitalBtnVertical';
-import PatientADTContainer from './PatientADTContainer/PatientADTContainer';
 export {
   Button,
   Bed,
@@ -42,5 +41,4 @@ export {
   VitalBtn,
   PatientHeader,
   PatientDataTabs,
-  PatientADTContainer,
 };
