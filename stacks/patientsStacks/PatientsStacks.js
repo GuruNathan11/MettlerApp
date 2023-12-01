@@ -39,6 +39,10 @@ import {
   AddTest2,
   AddTest3,
   AddTest4,
+  PatientADT,
+  BedAssignment,
+  AddTransfer,
+  AddDischarge,
 } from '../../screens';
 const Stack = createNativeStackNavigator();
 const PatientsStacks = () => {
@@ -65,6 +69,7 @@ const PatientsStacks = () => {
       <Stack.Screen name="PatientData" component={PatientData} />
       <Stack.Screen name="TreatmentPlan" component={TreatmentPlan} />
       <Stack.Screen name="Reports" component={Reports} />
+      <Stack.Screen name="PatientADT" component={PatientADT} />
       {/* Tier-5 */}
       <Stack.Screen name="Allergy" component={Allergy} />
       <Stack.Screen name="PatientProblem" component={PatientProblem} />
@@ -96,7 +101,9 @@ const PatientsStacks = () => {
       <Stack.Screen name="AddTest4" component={AddTest4} /> 
       <Stack.Screen name="AddAdmit" component={AddAdmit} /> 
       <Stack.Screen name="ConsultDetails" component={ConsultDetails} />
-
+      <Stack.Screen name="bedAssignment" component={BedAssignment} /> 
+      <Stack.Screen name="Addtransfer" component={AddTransfer} /> 
+      <Stack.Screen name="AddDischarge" component={AddDischarge} /> 
     </Stack.Navigator>
   );
 };

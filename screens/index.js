@@ -55,6 +55,10 @@ import AddTest3 from './Tier-6/addLab/AddTest3';
 import AddAdmit from './Tier-6/AddAdmit/AddAdmit';
 import AddTest2 from './Tier-6/AddImaging/AddTest2';
 import AddTest4 from './Tier-6/addConsult/AddTest4';
+import PatientADT from './Tier-4/patient ADT/PatientADT';
+import BedAssignment from './Tier-6/bedAssignment/BedAssignment';
+import AddTransfer from './Tier-6/Addtransfer/AddTransfer';
+import AddDischarge from './Tier-6/AddDischarge/AddDischarge';
 export {
   AdminConfiguration,
   AddAllergy,
@@ -114,4 +118,9 @@ export {
   AddTest2,
   AddTest3,
   AddTest4,
+  PatientADT,
+  BedAssignment,
+  AddTransfer,
+  AddDischarge,
+
 };

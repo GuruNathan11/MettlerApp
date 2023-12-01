@@ -26,7 +26,7 @@ const AdmitPatient = ({navigation, route}) => {
       color: '#E4FDFE',
       bg: '##E4FDFE',
       mIcon: require('../../../assets/images/Vector3.png'),
-      destination: '',
+      destination: 'PatientADT',
     },
     {
       name: 'Admit',
@@ -40,21 +40,21 @@ const AdmitPatient = ({navigation, route}) => {
         color: '#3972ED',
         bg: '#E9F1FD',
       mIcon: require('../../../assets/images/plus2.png'),
-      destination: '',
+      destination: 'BedAssignment',
     },
     {
       name: 'Transfer',
         color: '#6BB4A6',
         bg: '#FCF6F0',
       mIcon: require('../../../assets/images/clipboard.png'),
-      destination: '',
+      destination: 'AddTransfer',
     },
     {
       name: 'Discharge',
         color: '#6BB4A6',
         bg: '#EBF9EB',
       mIcon: require('../../../assets/images/clipboard(2).png'),
-      destination: '',
+      destination: 'AddDischarge',
     },
   ];
   return (
