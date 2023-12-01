@@ -1,3 +1,4 @@
+import Bed from './bed/Bed';
 import CalendarDate from './calendarDate/CalendarDate';
 import CheckBox from './checkBox/CheckBox';
 import CustomDrawer from './customDrawer/CustomDrawer';
@@ -21,6 +22,7 @@ import VitalBtnVertical from './vitalBtnVertical/VitalBtnVertical';
 
 export {
   Button,
+  Bed,
   CalendarDate,
   CheckBox,
   CustomDrawer,

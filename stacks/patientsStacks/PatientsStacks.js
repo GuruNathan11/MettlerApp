@@ -101,7 +101,7 @@ const PatientsStacks = () => {
       <Stack.Screen name="AddTest4" component={AddTest4} /> 
       <Stack.Screen name="AddAdmit" component={AddAdmit} /> 
       <Stack.Screen name="ConsultDetails" component={ConsultDetails} />
-      <Stack.Screen name="bedAssignment" component={BedAssignment} /> 
+      <Stack.Screen name="BedAssignment" component={BedAssignment} /> 
       <Stack.Screen name="Addtransfer" component={AddTransfer} /> 
       <Stack.Screen name="AddDischarge" component={AddDischarge} /> 
     </Stack.Navigator>
