@@ -59,6 +59,7 @@ import PatientADT from './Tier-4/patient ADT/PatientADT';
 import BedAssignment from './Tier-6/bedAssignment/BedAssignment';
 import AddTransfer from './Tier-6/Addtransfer/AddTransfer';
 import AddDischarge from './Tier-6/AddDischarge/AddDischarge';
+import ADTContainer from './Tier-4/patient ADT/ADTContainer';
 export {
   AdminConfiguration,
   AddAllergy,
@@ -122,5 +123,5 @@ export {
   BedAssignment,
   AddTransfer,
   AddDischarge,
-
+ ADTContainer,
 };

@@ -1,59 +1,68 @@
-// import {StyleSheet} from 'react-native';
+// import { StyleSheet } from 'react-native';
 
-// export const styles = StyleSheet.create({
+// const styles = StyleSheet.create({
 //   container: {
-//     flex: 1,
-//     backgroundColor:"#FFF"
-//   },
-//   patientView: {
+//     width: '95%',
+//     height: 75,
 //     flexDirection: 'row',
+//     alignItems: 'center',
 //     justifyContent: 'space-between',
-//     alignItems: 'center', 
-//     padding: 20,
-//     borderWidth: 0.8,
-//     borderColor: '#d9d9d9',
+//     borderBottomWidth: 1,
+//     borderBottomColor: '#CCC',
+//     marginHorizontal: 15,
 //   },
-
-//   nameView: {
-//     flex: 1, 
+//   leftContent: {
+//     alignItems: 'flex-start',
+//   },
+//   rightContent: {
+//     flexDirection: 'column',
+//     alignItems: 'center',
 //     marginLeft: 10,
 //   },
-//   pBtn: {
-//     maxHeight: 100,
+//   labelText: {
+//     color: '#000000',
+//     fontFamily: 'Poppins-Regular',
+//     fontSize: 14,
+//     lineHeight: 18.2,
+//     letterSpacing: 0.01,
 //   },
-//   patientUname: {
-//     fontSize: 15,
-//     fontWeight: '300',
+//   dateText: {
+//     color: '#000000',
+//     fontFamily: 'Poppins-Regular',
+//     fontSize: 14,
+//     lineHeight: 18.2,
+//     letterSpacing: 0.01,
 //   },
-//   patientName: {
-//     fontSize: 19,
-//     fontWeight: '600',
-//     color: '#000',
-//   },
-//   orgView: {
-//     backgroundColor: '#FFF',
-//     borderColor: '#65A455',
-//     borderWidth: 0.5,
-//     height: '60%',
-//     justifyContent: 'center',
-//     padding: 5,
-//     maxWidth: '30%',
-//   },
-//   orgName: {
-//     color: '#65A455',
+//   customLabel: {
+//     color: '#FF8C00',
+//     fontFamily: 'Inter-SemiBold',
 //     fontSize: 12,
-//     marginHorizontal: 10,
+//     lineHeight: 14.52,
+//     textAlign: 'center',
 //   },
-//   arrowView: {
+//   preAdmitBox: {
+//     width: 91,
+//     height: 29,
+//     borderRadius: 3,
+//     borderWidth: 1,
+//     borderColor: '#FF8C00',
 //     justifyContent: 'center',
-//     marginLeft: 5,
+//     alignItems: 'center',
+//     marginBottom: 5,
 //   },
-//   arrow: {
-//     fontSize: 30,
-//     fontWeight: '400',
+//   locationText: {
+//     color: '#000000',
+//     fontFamily: 'Poppins-Regular',
+//     fontSize: 12,
+//     lineHeight: 14.52,
+//     letterSpacing: 0.01,
 //   },
-//   flatList: {
-//     flex: 1,
-//     backgroundColor:"#FFF"
+//   profileImage: {
+//     width: 40,
+//     height: 40,
+//     borderRadius: 20,
+//     marginRight: 10,
 //   },
 // });
+
+// export default styles;
