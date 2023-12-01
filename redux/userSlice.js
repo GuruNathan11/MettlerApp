@@ -41,6 +41,8 @@ const userSlice = createSlice({
     Urgency: [],
     treatmentFactors: [],
     patientPosition: [],
+    privateCount: null,
+    semiPrivateCount: null,
     todayRN: null,
     lastVisitId: null,
     startTime: null,
@@ -276,6 +278,14 @@ const userSlice = createSlice({
       state.pending = false;
       state.consultData = action.payload;
     },
+    getPrivateBedConfigSuccess: (state, action) => {
+      state.pending = false;
+      state.privateCount = action.payload
+    },
+    getSemiPrivateBedConfigSuccess: (state, action) => {
+      state.pending = false;
+      state.semiPrivateCount = action.payload
+    }
   },
 });
 
@@ -296,6 +306,8 @@ export const {
   getProblemCategorySuccess,
   getProblemDescriptionSuccess,
   getProblemImmediacySuccess,
+  getPrivateBedConfigSuccess,
+  getSemiPrivateBedConfigSuccess,
   getQ15ActivitySuccess,
   getCompletedQ15Success,
   getIncompletedQ15Success,

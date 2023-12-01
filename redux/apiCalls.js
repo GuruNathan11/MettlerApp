@@ -46,6 +46,8 @@ import {
   sKeyVerifySuccess,
   // getprocedureDataSuccess,
   getUrgencyDataSuccess,
+  getPrivateBedConfigSuccess,
+  getSemiPrivateBedConfigSuccess,
   
 } from './userSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -861,3 +863,21 @@ export const postAdmit= async (dispatch, rObj) => {
     dispatch(apiCallError(error.response.data.errorMessage));
   }
 };
+export const getBedConfig = async (dispatch) => {
+  dispatch(apiCallStart())
+  try {
+    const response = await axios.get(`${baseURL}/bedConfig/getAll`)
+    if (response.data?.message.code === successCode) {
+      const semiPrivateCount = response.data?.data.filter(item => item.bedType === "2");
+      const privateCount = response.data?.data.filter(item => item.bedType === "1");
+      dispatch(getPrivateBedConfigSuccess(privateCount))
+      dispatch(getSemiPrivateBedConfigSuccess(semiPrivateCount))
+      console.log(privateCount)
+    } else {
+      console.log(response.data)
+    }
+  } catch (error) {
+    console.log(error);
+    dispatch(apiCallError(error.response.data.errorMessage));
+  }
+}
