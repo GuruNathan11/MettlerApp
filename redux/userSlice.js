@@ -54,6 +54,7 @@ const userSlice = createSlice({
     mainStack: false,
     success: false,
     error: null,
+    admitPatient: [],
   },
   reducers: {
     apiCallStart: state => {
@@ -282,6 +283,10 @@ const userSlice = createSlice({
       state.pending = false;
       state.privateCount = action.payload
     },
+    getAdmitSuccess: (state, action) => {
+      state.pending = false;
+      state.admitPatient = action.payload
+    },
     getSemiPrivateBedConfigSuccess: (state, action) => {
       state.pending = false;
       state.semiPrivateCount = action.payload
@@ -343,5 +348,6 @@ export const {
   getImagingProcedureDataSuccess,
   getLabTestByPatientSuccess,
   getConsultByPatientSuccess,
+  getAdmitSuccess,
 } = userSlice.actions;
 export default userSlice.reducer;

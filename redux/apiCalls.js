@@ -48,6 +48,7 @@ import {
   getUrgencyDataSuccess,
   getPrivateBedConfigSuccess,
   getSemiPrivateBedConfigSuccess,
+  getAdmitSuccess,
   
 } from './userSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -881,3 +882,20 @@ export const getBedConfig = async (dispatch) => {
     dispatch(apiCallError(error.response.data.errorMessage));
   }
 }
+
+// getBy admit by id 
+
+export const getAdmit = async (dispatch,pid) => {
+  dispatch(apiCallStart());
+  try {
+    const res = await axios.get(`${baseURL}/admit/getByPid/${pid}`);
+    // console.log(res.data.data);
+    dispatch(getAdmitSuccess(res.data.data));
+    // Alert.alert(res.data.message.code)
+    // Alert.alert(pid)
+  } catch (error) {
+    console.log(error);
+    dispatch(apiCallError(error.response.data.errorMessage));
+  }
+};
+

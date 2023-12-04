@@ -1,13 +1,24 @@
-
 import { PatientHeader } from '../../../components';
-
-import React from 'react';
-import { View, Text } from 'react-native';
-import ADTContainer from './ADTContainer'; // Adjust the path accordingly
+import { View, Text, TouchableOpacity } from 'react-native';
+import ADTContainer from './ADTContainer'; 
+import { useDispatch, useSelector } from 'react-redux';
+import React, {useEffect} from 'react';
+import {getAdmit} from '../../../redux/apiCalls';
+import { useIsFocused } from '@react-navigation/native';
+import { FlatList } from 'react-native-gesture-handler';
 
 const PatientADT = ({ navigation, route }) => {
   const { patient } = route.params;
-
+  const dispatch = useDispatch();
+  const isFocused = useIsFocused(); 
+  const pid = patient.id;
+  const admitPatient = useSelector(state => state.user.admitPatient);
+  useEffect(() => {
+    if (isFocused) {
+      // Check if the screen is in focus
+      getAdmit(dispatch, pid);
+    }
+  }, [isFocused]);
   return (
     <View style={{ flex: 1 }}>
       <PatientHeader
@@ -24,15 +35,39 @@ const PatientADT = ({ navigation, route }) => {
         }}>
         &nbsp;&nbsp;&nbsp; Patient ADT
       </Text>
-
-      {/* Reuse the container with different props */}
-      <ADTContainer
-        date="July 24, 10:30 PM"
-        label="Pre Admit"
-        labelText="Dr. Linda Blair, OP"
+      <FlatList
+          data={admitPatient}
+          keyExtractor={(item) => item.id.toString()} // Assuming 'id' is a unique identifier for each procedure
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item, index }) => (
+              
+            <TouchableOpacity
+              activeOpacity={0.8}
+              // style={styles.pBtn}
+              onPress={() => {
+                // console.log(patient)
+              //  navigation.navigate('ImagingDetails', { item });
+              }}
+            >
+              
+              <ADTContainer
+        //  date={item}
+        bg={item.status==="Admitted"?"yellow":item.status==="Transfered"?"green":"#000"}
+        label={item.status}
+        labelText={patient.username}
         profileImageSource={require('../../../assets/images/avatar.png')}
       />
-       <ADTContainer
+              {/* <View style={styles.patientView}> */}
+                {/* <Text style={styles.patientName}>{item.status}</Text>
+                <View style={styles.arrowView}>
+                  <MIcon name="arrow-forward-ios" size={35} color="#8d8d8d" />
+                </View>
+              </View> */}
+            </TouchableOpacity>
+          )}
+        />
+      
+       {/* <ADTContainer
         date="July 24, 10:30 PM"
         label="Admit"
         labelText="Dr. Linda Blair, OP"
@@ -51,6 +86,12 @@ const PatientADT = ({ navigation, route }) => {
         labelText="Dr. Linda Blair, OP"
         profileImageSource={require('../../../assets/images/avatar.png')}
       />
+       <ADTContainer
+        date="July 24, 10:30 PM"
+        label="Pre Admit"
+        labelText="Dr. Linda Blair, OP"
+        profileImageSource={require('../../../assets/images/avatar.png')}
+      /> */}
       {/* Repeat this block with different props as needed */}
       {/* <PatientADTContainer ... /> */}
       {/* <PatientADTContainer ... /> */}
