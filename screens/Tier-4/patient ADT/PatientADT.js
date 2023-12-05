@@ -6,7 +6,7 @@ import React, {useEffect} from 'react';
 import {getAdmit} from '../../../redux/apiCalls';
 import { useIsFocused } from '@react-navigation/native';
 import { FlatList } from 'react-native-gesture-handler';
-
+import { ScrollView } from 'react-native-gesture-handler';
 const PatientADT = ({ navigation, route }) => {
   const { patient } = route.params;
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ const PatientADT = ({ navigation, route }) => {
               
               <ADTContainer
         //  date={item}
-        bg={item.status==="Admitted"?"yellow":item.status==="Transfered"?"green":"#000"}
+        bg={item.status==="Admitted"?"#1E90FF":item.status==="Transfered"?"green":"#000"}
         label={item.status}
         labelText={patient.username}
         profileImageSource={require('../../../assets/images/avatar.png')}

@@ -49,6 +49,8 @@ import {
   getPrivateBedConfigSuccess,
   getSemiPrivateBedConfigSuccess,
   getAdmitSuccess,
+  getProcedureSuccess,
+  getImagingTypeSuccess,
   
 } from './userSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -527,12 +529,14 @@ export const getDropdowns = async (dispatch, name) => {
     } else if (name === 'anatomicLocation') {
       dispatch(getAnatomicLocationSuccess(res.data.data[0].list));
     }
-    else if (name === 'location') {
-      dispatch(getLocationSuccess(res.data.data[0].list));
+    else if (name === 'Procedure') {
+      dispatch(getProcedureSuccess(res.data.data[0].list));
     }
-    else if (name === ' Urgency') {
-      console.log(res.data.data[0])
-      dispatch(getUrgencyDataSuccess(res.data.data[0].list));
+    else if (name === 'Urgency') {
+      dispatch(getUrgencySuccess(res.data.data[0].list));
+    }
+    else if (name === 'ImagingType') {
+      dispatch(getImagingTypeSuccess(res.data.data[0].list));
     }
     else if (name === 'TreatmentFactors') {
       dispatch(getTreatmentFactorsSuccess(res.data.data[0].list));

@@ -197,15 +197,6 @@ const AddTransfer = ({navigation, route}) => {
                 alignItems: 'center',
               }}>
               <Text>
-                {/* {date1 &&
-                  `${date1?.getDate().toString().padStart(2, '0')}.${parseInt(
-                    date1?.getMonth() + 1,
-                  )
-                    .toString()
-                    .padStart(
-                      2,
-                      '0',
-                    )}.${date1?.getFullYear()} (Admission Date & Time)`} */}
                       Date 
               </Text>
               <MCIcon name="calendar-edit" size={30} color="#8d8d8d" />

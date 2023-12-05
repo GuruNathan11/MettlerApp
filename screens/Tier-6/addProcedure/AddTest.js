@@ -30,8 +30,9 @@ const AddTest = ({navigation, route}) => {
   const [enteredDate, setEnteredDate] = useState(null);
   const [reactDate, setReactDate] = useState(null);
   const [comments, setComments] = useState(null);
-  const Urgency = useSelector(state => state.user.location);
+  const Urgency = useSelector(state => state.user.Urgency);
   const [values, setValues] = useState(Array(mappedData?.length).fill(null));
+  const Procedure = useSelector(state => state.user.Procedure);
   const [multiSelectValues, setMultiSelectValues] = useState(
     Array(mappedData?.length).fill([]),
   );
@@ -41,20 +42,21 @@ const AddTest = ({navigation, route}) => {
   useEffect(() => {
     getPatientVisit(dispatch, patient.id);
     getDropdowns(dispatch, 'Urgency');
+    getDropdowns(dispatch,'Procedure');
   }, []);
   const UrgencyData = Urgency.map(item => ({
     label: item.value,
     value: item.id,
   }));
+  const ProcedureData = Procedure.map(item => ({
+        label: item.value,
+        value: item.id,
+      }));
 
   const mappedData = [
     {
       placeholder: 'Procedure',
-      data: [
-        { label: 'Normal', value: 'Normal' },
-        { label: 'Mild', value: 'Mild' },
-        { label: 'Severe', value: 'Severe' },
-      ],
+      data: ProcedureData,
     },
     {
       placeholder: 'Urgency',
@@ -219,7 +221,7 @@ const AddTest = ({navigation, route}) => {
                     newValues[index] = selectedItem.value;
                     // Set the updated values state
                     setValues(newValues);
-                    console.log(values);
+                    // console.log(values);
                   }}
                 />
               </View>

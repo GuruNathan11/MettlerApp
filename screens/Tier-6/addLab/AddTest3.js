@@ -26,7 +26,7 @@ const AddTest3 = ({navigation, route}) => {
   const [enteredDate, setEnteredDate] = useState(null);
   const [reactDate, setReactDate] = useState(null);
   const [comments, setComments] = useState(null);
-  const Urgency = useSelector(state => state.user.location);
+  const Urgency = useSelector(state => state.user.Urgency);
   const [values, setValues] = useState(Array(mappedData?.length).fill(null));
   const [multiSelectValues, setMultiSelectValues] = useState(
     Array(mappedData?.length).fill([]),
@@ -74,11 +74,7 @@ const AddTest3 = ({navigation, route}) => {
     },
     {
       placeholder: 'Urgency',
-      data: [
-        {label: 'x', value: 'x'},
-        {label: 'y', value: 'y'},
-        {label: 'z', value: 'z'},
-      ],
+      data: UrgencyData,
     },
     {
       placeholder: 'How Often',

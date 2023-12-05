@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 
-const ADTContainer = ({ date, label, labelText, profileImageSource,  backgroundColor ,bg }) => {
+const ADTContainer = ({ date, label, labelText, profileImageSource,  backgroundColor ,bg,bordercolor }) => {
   
   
   
@@ -30,7 +30,7 @@ const ADTContainer = ({ date, label, labelText, profileImageSource,  backgroundC
     <View style={[styles.container, { backgroundColor }]}>
     <View style={styles.leftContent}>
       <Text style={styles.dateText}>{date}</Text>
-      <View style={[styles.labelBox,{ backgroundColor:bg}]}>
+      <View style={[styles.labelBox,{ backgroundColor:bordercolor}]}>
         <Text style={getLabelStyle()}>{label}</Text>
       </View>
     </View>
@@ -81,6 +81,8 @@ labelBox: {
   borderWidth: 1,
   justifyContent: 'center',
   alignItems: 'center',
+  Color: '#1E90FF',
+  borderColor: '#1E90FF'
 },
 customLabel: {
   color: '#FF8C00',

@@ -26,7 +26,8 @@ const AddTest2 = ({navigation, route}) => {
   const [enteredDate, setEnteredDate] = useState(null);
   const [reactDate, setReactDate] = useState(null);
   const [comments, setComments] = useState(null);
-  const Urgency = useSelector(state => state.user.location);
+  const Urgency = useSelector(state => state.user.Urgency);
+  const ImagingType = useSelector(state => state.user.ImagingType);
   const [values, setValues] = useState(Array(mappedData?.length).fill(null));
   const [multiSelectValues, setMultiSelectValues] = useState(
     Array(mappedData?.length).fill([]),
@@ -37,20 +38,20 @@ const AddTest2 = ({navigation, route}) => {
   useEffect(() => {
     getPatientVisit(dispatch, patient.id);
     getDropdowns(dispatch, 'Urgency');
+    getDropdowns(dispatch, 'ImagingType');
   }, []);
   const UrgencyData = Urgency.map(item => ({
     label: item.value,
     value: item.id,
   }));
-
+  const ImagingTypeData = ImagingType.map(item => ({
+    label: item.value,
+    value: item.id,
+  }));
   const mappedData = [
     {
       placeholder: 'Imaging Type',
-      data: [
-        {label: 'Normal', value: 'Normal'},
-        {label: 'Mild', value: 'Mild'},
-        {label: 'Severe', value: 'Severe'},
-      ],
+      data: ImagingTypeData,
     },
     {
       placeholder: 'Reason for Study',
@@ -66,11 +67,7 @@ const AddTest2 = ({navigation, route}) => {
     },
     {
       placeholder: 'Urgency',
-      data: [
-        {label: 'm', value: 'm'},
-        {label: 's', value: 's'},
-        {label: 'k', value: 'k'},
-      ],
+      data: UrgencyData,
     },
     {
       placeholder: 'Transport',

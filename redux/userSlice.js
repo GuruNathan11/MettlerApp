@@ -29,7 +29,7 @@ const userSlice = createSlice({
     patientVisits: [],
     patientProblem: [],
     immunizationData: [],
-    allergyName: [],
+    allergyNames: [],
     natureOfReactions: [],
     symptoms: [],
     problemCategory: [],
@@ -38,6 +38,8 @@ const userSlice = createSlice({
     immunizationRoute: [],
     anatomicLocation: [],
     location: [],
+    Procedure: [],
+    ImagingType: [],
     Urgency: [],
     treatmentFactors: [],
     patientPosition: [],
@@ -232,6 +234,14 @@ const userSlice = createSlice({
       state.pending = false;
       state.location = action.payload;
     },
+    getProcedureSuccess: (state, action) => {
+      state.pending = false;
+      state.Procedure = action.payload;
+    },
+    getImagingTypeSuccess: (state, action) => {
+      state.pending = false;
+      state.ImagingType = action.payload;
+    },
     getUrgencySuccess: (state, action) => {
       state.pending = false;
       state.Urgency = action.payload;
@@ -317,6 +327,8 @@ export const {
   getCompletedQ15Success,
   getIncompletedQ15Success,
   getLocationSuccess,
+  getImagingTypeSuccess,
+  getProcedureSuccess,
   getUrgencySuccess,
   getUrgencyDataSuccess,
   getTreatmentFactorsSuccess,
