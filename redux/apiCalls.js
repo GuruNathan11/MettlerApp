@@ -51,6 +51,11 @@ import {
   getAdmitSuccess,
   getProcedureSuccess,
   getImagingTypeSuccess,
+  getModifiersSuccess,
+  getTransportSuccess,
+  getCategorySuccess,
+  getsubmitToSuccess,
+  getLabTestSuccess,
   
 } from './userSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -58,7 +63,7 @@ import {BASE_URL} from '@env';
 import {Alert} from 'react-native';
 
 // const baseURL = BASE_URL;
-const baseURL = 'http://web.mettlerhealth.com:7000/api';
+const baseURL = 'http://47.32.254.89:7000/api';
 const successCode = 'MHC - 0200';
 
 export const GetOrganization = async dispatch => {
@@ -537,6 +542,21 @@ export const getDropdowns = async (dispatch, name) => {
     }
     else if (name === 'ImagingType') {
       dispatch(getImagingTypeSuccess(res.data.data[0].list));
+    }
+    else if (name === 'Modifiers') {
+      dispatch(getModifiersSuccess(res.data.data[0].list));
+    }
+    else if (name === 'Transport') {
+      dispatch(getTransportSuccess(res.data.data[0].list));
+    }
+    else if (name === 'Category') {
+      dispatch(getCategorySuccess(res.data.data[0].list));
+    }
+    else if (name === 'submitTo') {
+      dispatch(getsubmitToSuccess(res.data.data[0].list));
+    }
+    else if (name === 'LabTest') {
+      dispatch(getLabTestSuccess(res.data.data[0].list));
     }
     else if (name === 'TreatmentFactors') {
       dispatch(getTreatmentFactorsSuccess(res.data.data[0].list));

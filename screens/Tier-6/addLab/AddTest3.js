@@ -27,6 +27,7 @@ const AddTest3 = ({navigation, route}) => {
   const [reactDate, setReactDate] = useState(null);
   const [comments, setComments] = useState(null);
   const Urgency = useSelector(state => state.user.Urgency);
+  const LabTest = useSelector(state => state.user.LabTest);
   const [values, setValues] = useState(Array(mappedData?.length).fill(null));
   const [multiSelectValues, setMultiSelectValues] = useState(
     Array(mappedData?.length).fill([]),
@@ -37,8 +38,13 @@ const AddTest3 = ({navigation, route}) => {
   useEffect(() => {
     getPatientVisit(dispatch, patient.id);
     getDropdowns(dispatch, 'Urgency');
+    getDropdowns(dispatch, 'LabTest');
   }, []);
   const UrgencyData = Urgency.map(item => ({
+    label: item.value,
+    value: item.id,
+  }));
+  const LabTestData = LabTest.map(item => ({
     label: item.value,
     value: item.id,
   }));
@@ -46,11 +52,7 @@ const AddTest3 = ({navigation, route}) => {
   const mappedData = [
     {
       placeholder: 'Lab Test',
-      data: [
-        {label: 'Normal', value: 'Normal'},
-        {label: 'Mild', value: 'Mild'},
-        {label: 'Severe', value: 'Severe'},
-      ],
+      data: LabTestData,
     },
     {
       placeholder: 'Collection Type',

@@ -28,6 +28,10 @@ const AddTest2 = ({navigation, route}) => {
   const [comments, setComments] = useState(null);
   const Urgency = useSelector(state => state.user.Urgency);
   const ImagingType = useSelector(state => state.user.ImagingType);
+  const Modifiers = useSelector(state => state.user.Modifiers);
+  const Transport = useSelector(state => state.user.Transport);
+  const Category = useSelector(state => state.user.Category);
+  const submitTo = useSelector(state => state.user.submitTo);
   const [values, setValues] = useState(Array(mappedData?.length).fill(null));
   const [multiSelectValues, setMultiSelectValues] = useState(
     Array(mappedData?.length).fill([]),
@@ -39,12 +43,32 @@ const AddTest2 = ({navigation, route}) => {
     getPatientVisit(dispatch, patient.id);
     getDropdowns(dispatch, 'Urgency');
     getDropdowns(dispatch, 'ImagingType');
+    getDropdowns(dispatch, 'Modifiers');
+    getDropdowns(dispatch, 'Transport');
+    getDropdowns(dispatch, 'Category');
+    getDropdowns(dispatch, 'submitTo');
   }, []);
   const UrgencyData = Urgency.map(item => ({
     label: item.value,
     value: item.id,
   }));
   const ImagingTypeData = ImagingType.map(item => ({
+    label: item.value,
+    value: item.id,
+  }));
+  const ModifiersData = Modifiers.map(item => ({
+    label: item.value,
+    value: item.id,
+  }));
+  const TransportData = Transport.map(item => ({
+    label: item.value,
+    value: item.id,
+  }));
+  const CategoryData = Category.map(item => ({
+    label: item.value,
+    value: item.id,
+  }));
+  const submitToData = Category.map(item => ({
     label: item.value,
     value: item.id,
   }));
@@ -59,11 +83,7 @@ const AddTest2 = ({navigation, route}) => {
     },
     {
       placeholder: 'Modifiers',
-      data: [
-        {label: 's', value: 's'},
-        {label: 'w', value: 'w'},
-        {label: 'v', value: 'v'},
-      ],
+      data: ModifiersData,
     },
     {
       placeholder: 'Urgency',
@@ -71,27 +91,15 @@ const AddTest2 = ({navigation, route}) => {
     },
     {
       placeholder: 'Transport',
-      data: [
-        {label: 'x', value: 'x'},
-        {label: 'y', value: 'y'},
-        {label: 'z', value: 'z'},
-      ],
+      data: TransportData,
     },
     {
       placeholder: 'Category',
-      data: [
-        {label: 'h', value: 'h'},
-        {label: 'd', value: 'd'},
-        {label: 'c', value: 'c'},
-      ],
+      data: CategoryData,
     },
     {
       placeholder: 'Submit to',
-      data: [
-        {label: 'l', value: 'l'},
-        {label: 'd', value: 'd'},
-        {label: 'e', value: 'e'},
-      ],
+      data: submitToData,
     },
     {
         placeholder: 'Pre OP Scheduled',

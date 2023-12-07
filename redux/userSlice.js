@@ -40,7 +40,12 @@ const userSlice = createSlice({
     location: [],
     Procedure: [],
     ImagingType: [],
+    Modifiers: [],
+    Transport: [],
+    Category: [],
+    submitTo: [],
     Urgency: [],
+    LabTest: [],
     treatmentFactors: [],
     patientPosition: [],
     privateCount: null,
@@ -242,6 +247,26 @@ const userSlice = createSlice({
       state.pending = false;
       state.ImagingType = action.payload;
     },
+    getModifiersSuccess: (state, action) => {
+      state.pending = false;
+      state.Modifiers = action.payload;
+    },
+    getTransportSuccess: (state, action) => {
+      state.pending = false;
+      state.Transport = action.payload;
+    },
+    getCategorySuccess: (state, action) => {
+      state.pending = false;
+      state.Category = action.payload;
+    },
+    getsubmitToSuccess: (state, action) => {
+      state.pending = false;
+      state.submitTo = action.payload;
+    },
+    getLabTestSuccess: (state, action) => {
+      state.pending = false;
+      state.LabTest = action.payload;
+    },
     getUrgencySuccess: (state, action) => {
       state.pending = false;
       state.Urgency = action.payload;
@@ -328,6 +353,9 @@ export const {
   getIncompletedQ15Success,
   getLocationSuccess,
   getImagingTypeSuccess,
+  getModifiersSuccess,
+  getTransportSuccess,
+  getCategorySuccess,
   getProcedureSuccess,
   getUrgencySuccess,
   getUrgencyDataSuccess,
@@ -342,6 +370,8 @@ export const {
   getQ15ConfigSuccess,
   getQ15LocationSuccess,
   getTodayRNSuccess,
+  getsubmitToSuccess,
+  getLabTestSuccess,
   getVitalByPatientIdSuccess,
   loginSuccess,
   logoutSuccess,
