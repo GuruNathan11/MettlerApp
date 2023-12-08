@@ -31,6 +31,7 @@ const AddTest = ({navigation, route}) => {
   const [reactDate, setReactDate] = useState(null);
   const [comments, setComments] = useState(null);
   const Urgency = useSelector(state => state.user.Urgency);
+  const placeofConsultation = useSelector(state => state.user.placeofConsultation);
   const [values, setValues] = useState(Array(mappedData?.length).fill(null));
   const Procedure = useSelector(state => state.user.Procedure);
   const [multiSelectValues, setMultiSelectValues] = useState(
@@ -43,15 +44,20 @@ const AddTest = ({navigation, route}) => {
     getPatientVisit(dispatch, patient.id);
     getDropdowns(dispatch, 'Urgency');
     getDropdowns(dispatch,'Procedure');
+    getDropdowns(dispatch, 'place of Consultation');
   }, []);
   const UrgencyData = Urgency.map(item => ({
     label: item.value,
     value: item.id,
   }));
   const ProcedureData = Procedure.map(item => ({
-        label: item.value,
-        value: item.id,
-      }));
+     label: item.value,
+     value: item.id,
+   }));
+  const placeofConsultationData = placeofConsultation.map(item => ({
+   label: item.value,
+   value: item.id,
+   }));
 
   const mappedData = [
     {
@@ -80,11 +86,7 @@ const AddTest = ({navigation, route}) => {
         },
     {
       placeholder: 'Place of Consultation',
-      data:  [
-        { label: 'x', value: 'x' },
-        { label: 'y', value: 'y' },
-        { label: 'z', value: 'z' },
-      ],
+      data:  placeofConsultationData,
     },  
     {
       placeholder: 'Ordered by',
@@ -227,7 +229,7 @@ const AddTest = ({navigation, route}) => {
               </View>
             )}
           />
-          <View style={[styles.inputView]}>
+           <View style={[styles.inputView]}>
             <Pressable
               onPress={() => setOpen(true)}
               style={{
@@ -245,7 +247,7 @@ const AddTest = ({navigation, route}) => {
                     .padStart(
                       2,
                       '0',
-                    )}.${date?.getFullYear()} (Origination Date)`}
+                    )}.${date?.getFullYear()} (Earliest appropriate Date)`}
               </Text>
               <MCIcon name="calendar-edit" size={30} color="#8d8d8d" />
             </Pressable>
@@ -269,51 +271,6 @@ const AddTest = ({navigation, route}) => {
               }}
               onCancel={() => {
                 setOpen(false);
-              }}
-            />
-          </View>
-          <View style={[styles.inputView]}>
-            <Pressable
-              onPress={() => setOpen1(true)}
-              style={{
-                width: '100%',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}>
-              <Text>
-                {date1 &&
-                  `${date1?.getDate().toString().padStart(2, '0')}.${parseInt(
-                    date1?.getMonth() + 1,
-                  )
-                    .toString()
-                    .padStart(
-                      2,
-                      '0',
-                    )}.${date1?.getFullYear()} (Reaction Date/Time)`}
-              </Text>
-              <MCIcon name="calendar-edit" size={30} color="#8d8d8d" />
-            </Pressable>
-            <DatePicker
-              modal
-              mode="datetime"
-              textColor="#0f3995"
-              open={open1}
-              date={date1}
-              onConfirm={date1 => {
-                setOpen1(false);
-                setDate1(date1);
-                setReactDate(
-                  `${date1?.getFullYear()}${parseInt(date1?.getMonth() + 1)
-                    .toString()
-                    .padStart(2, '0')}${date1
-                    ?.getDate()
-                    .toString()
-                    .padStart(2, '0')}`,
-                );
-              }}
-              onCancel={() => {
-                setOpen1(false);
               }}
             />
           </View>

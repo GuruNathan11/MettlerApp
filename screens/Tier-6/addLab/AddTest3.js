@@ -27,7 +27,10 @@ const AddTest3 = ({navigation, route}) => {
   const [reactDate, setReactDate] = useState(null);
   const [comments, setComments] = useState(null);
   const Urgency = useSelector(state => state.user.Urgency);
+  const CollectionSample = useSelector(state => state.user.CollectionSample);
   const LabTest = useSelector(state => state.user.LabTest);
+  const HowOften = useSelector(state => state.user.HowOften);
+  const Speicmen = useSelector(state => state.user.Speicmen);
   const [values, setValues] = useState(Array(mappedData?.length).fill(null));
   const [multiSelectValues, setMultiSelectValues] = useState(
     Array(mappedData?.length).fill([]),
@@ -39,6 +42,9 @@ const AddTest3 = ({navigation, route}) => {
     getPatientVisit(dispatch, patient.id);
     getDropdowns(dispatch, 'Urgency');
     getDropdowns(dispatch, 'LabTest');
+    getDropdowns(dispatch, 'CollectionSample');
+    getDropdowns(dispatch, 'Speicmen');
+    getDropdowns(dispatch, 'HowOften');
   }, []);
   const UrgencyData = Urgency.map(item => ({
     label: item.value,
@@ -48,6 +54,19 @@ const AddTest3 = ({navigation, route}) => {
     label: item.value,
     value: item.id,
   }));
+  const CollectionSampleData = CollectionSample.map(item => ({
+    label: item.value,
+    value: item.id,
+  }));
+  const SpeicmenData = Speicmen.map(item => ({
+    label: item.value,
+    value: item.id,
+  }));
+  const HowOftenData = HowOften.map(item => ({
+    label: item.value,
+    value: item.id,
+  }));
+
 
   const mappedData = [
     {
@@ -60,19 +79,11 @@ const AddTest3 = ({navigation, route}) => {
     },
     {
       placeholder: 'Collection Sample',
-      data: [
-        {label: 's', value: 's'},
-        {label: 'w', value: 'w'},
-        {label: 'v', value: 'v'},
-      ],
+      data:  CollectionSampleData,
     },
     {
       placeholder: 'Specimen',
-      data: [
-        {label: 'm', value: 'm'},
-        {label: 's', value: 's'},
-        {label: 'k', value: 'k'},
-      ],
+      data: SpeicmenData,
     },
     {
       placeholder: 'Urgency',
@@ -80,11 +91,7 @@ const AddTest3 = ({navigation, route}) => {
     },
     {
       placeholder: 'How Often',
-      data: [
-        {label: 'h', value: 'h'},
-        {label: 'd', value: 'd'},
-        {label: 'c', value: 'c'},
-      ],
+      data:  HowOftenData,
     },
     {
       placeholder: 'How Long',
@@ -244,7 +251,7 @@ const AddTest3 = ({navigation, route}) => {
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}>
-              <Text>
+               <Text style={{ fontSize: 20}}>
                 {date &&
                   `${date?.getDate().toString().padStart(2, '0')}.${parseInt(
                     date?.getMonth() + 1,
@@ -253,7 +260,7 @@ const AddTest3 = ({navigation, route}) => {
                     .padStart(
                       2,
                       '0',
-                    )}.${date?.getFullYear()} (Earliest appropriate date)`}
+                    )}.${date?.getFullYear()} (Collection Date/Time)`}               
               </Text>
               <MCIcon name="calendar-edit" size={30} color="#8d8d8d" />
             </Pressable>
@@ -280,51 +287,7 @@ const AddTest3 = ({navigation, route}) => {
               }}
             />
           </View>
-          <View style={[styles.inputView]}>
-            <Pressable
-              onPress={() => setOpen1(true)}
-              style={{
-                width: '100%',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}>
-              <Text>
-                {date1 &&
-                  `${date1?.getDate().toString().padStart(2, '0')}.${parseInt(
-                    date1?.getMonth() + 1,
-                  )
-                    .toString()
-                    .padStart(
-                      2,
-                      '0',
-                    )}.${date1?.getFullYear()} (Reaction Date/Time)`}
-              </Text>
-              <MCIcon name="calendar-edit" size={30} color="#8d8d8d" />
-            </Pressable>
-            <DatePicker
-              modal
-              mode="datetime"
-              textColor="#0f3995"
-              open={open1}
-              date={date1}
-              onConfirm={date1 => {
-                setOpen1(false);
-                setDate1(date1);
-                setReactDate(
-                  `${date1?.getFullYear()}${parseInt(date1?.getMonth() + 1)
-                    .toString()
-                    .padStart(2, '0')}${date1
-                    ?.getDate()
-                    .toString()
-                    .padStart(2, '0')}`,
-                );
-              }}
-              onCancel={() => {
-                setOpen1(false);
-              }}
-            />
-          </View>
+          
           <View style={[styles.inputView]}>
             <TextInput
               style={styles.input}

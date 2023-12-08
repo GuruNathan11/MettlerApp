@@ -56,6 +56,11 @@ import {
   getCategorySuccess,
   getsubmitToSuccess,
   getLabTestSuccess,
+  getCollectionSampleSuccess,
+  getSpeicmenSuccess,
+  getHowOftenSuccess,
+  getspecialitySuccess,
+  getplaceofConsultationSuccess,
   
 } from './userSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -555,8 +560,23 @@ export const getDropdowns = async (dispatch, name) => {
     else if (name === 'submitTo') {
       dispatch(getsubmitToSuccess(res.data.data[0].list));
     }
+    else if (name === 'CollectionSample') {
+      dispatch(getCollectionSampleSuccess(res.data.data[0].list));
+    }
     else if (name === 'LabTest') {
       dispatch(getLabTestSuccess(res.data.data[0].list));
+    }
+    else if (name === 'Speicmen') {
+      dispatch(getSpeicmenSuccess(res.data.data[0].list));
+    }
+    else if (name === 'speciality') {
+      dispatch(getspecialitySuccess(res.data.data[0].list));
+    }
+    else if (name === 'HowOften') {
+      dispatch(getHowOftenSuccess(res.data.data[0].list));
+    }
+    else if (name === 'place of Consultation') {
+      dispatch(getplaceofConsultationSuccess(res.data.data[0].list));
     }
     else if (name === 'TreatmentFactors') {
       dispatch(getTreatmentFactorsSuccess(res.data.data[0].list));

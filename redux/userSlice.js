@@ -24,6 +24,7 @@ const userSlice = createSlice({
     allergyData: [],
     labtestData: [],
     consultData: [],
+    placeofConsultation: [],
     ProcedureData: [],
     ImagingProcedureData: [],
     patientVisits: [],
@@ -32,6 +33,7 @@ const userSlice = createSlice({
     allergyNames: [],
     natureOfReactions: [],
     symptoms: [],
+    HowOften: [],
     problemCategory: [],
     problemImmediacy: [],
     problemDescription: [],
@@ -42,10 +44,13 @@ const userSlice = createSlice({
     ImagingType: [],
     Modifiers: [],
     Transport: [],
+    speciality: [],
     Category: [],
     submitTo: [],
     Urgency: [],
     LabTest: [],
+    Speicmen: [],
+    CollectionSample: [],
     treatmentFactors: [],
     patientPosition: [],
     privateCount: null,
@@ -211,6 +216,10 @@ const userSlice = createSlice({
       state.pending = false;
       state.symptoms = action.payload;
     },
+    getplaceofConsultationSuccess: (state, action) => {
+      state.pending = false;
+      state.placeofConsultation = action.payload;
+    },
     getProblemCategorySuccess: (state, action) => {
       state.pending = false;
       state.problemCategory = action.payload;
@@ -259,9 +268,25 @@ const userSlice = createSlice({
       state.pending = false;
       state.Category = action.payload;
     },
+    getSpeicmenSuccess: (state, action) => {
+      state.pending = false;
+      state.Speicmen = action.payload;
+    },
     getsubmitToSuccess: (state, action) => {
       state.pending = false;
       state.submitTo = action.payload;
+    },
+    getCollectionSampleSuccess: (state, action) => {
+      state.pending = false;
+      state.CollectionSample = action.payload;
+    },
+    getHowOftenSuccess: (state, action) => {
+      state.pending = false;
+      state.HowOften = action.payload;
+    },
+    getspecialitySuccess: (state, action) => {
+      state.pending = false;
+      state.speciality = action.payload;
     },
     getLabTestSuccess: (state, action) => {
       state.pending = false;
@@ -350,6 +375,7 @@ export const {
   getSemiPrivateBedConfigSuccess,
   getQ15ActivitySuccess,
   getCompletedQ15Success,
+  getplaceofConsultationSuccess,
   getIncompletedQ15Success,
   getLocationSuccess,
   getImagingTypeSuccess,
@@ -357,8 +383,10 @@ export const {
   getTransportSuccess,
   getCategorySuccess,
   getProcedureSuccess,
+  getCollectionSampleSuccess,
   getUrgencySuccess,
   getUrgencyDataSuccess,
+  getspecialitySuccess,
   getTreatmentFactorsSuccess,
   getNatureOfReactionSuccess,
   getPatientAllVisitSuccess,
@@ -370,7 +398,9 @@ export const {
   getQ15ConfigSuccess,
   getQ15LocationSuccess,
   getTodayRNSuccess,
+  getHowOftenSuccess,
   getsubmitToSuccess,
+  getSpeicmenSuccess,
   getLabTestSuccess,
   getVitalByPatientIdSuccess,
   loginSuccess,

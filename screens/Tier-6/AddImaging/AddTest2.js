@@ -101,14 +101,7 @@ const AddTest2 = ({navigation, route}) => {
       placeholder: 'Submit to',
       data: submitToData,
     },
-    {
-        placeholder: 'Pre OP Scheduled',
-        data: [
-          {label: 'l', value: 'l'},
-          {label: 'd', value: 'd'},
-          {label: 'e', value: 'e'},
-        ],
-      },
+
       {
         placeholder: 'Exams Over the last 7 Days',
         data: [
@@ -146,10 +139,9 @@ const AddTest2 = ({navigation, route}) => {
       transport: values[5],
       category: values[6],
       submitTo: values[7],
-      preOpScheduled: values[8],
-      examsOver: values[9],
-      orderedBy: values[10],
-      enteredBy: values[11],
+      examsOver: values[8],
+      orderedBy: values[9],
+      enteredBy: values[10],
       comments: comments,
     };
     if (values.length > 4) {
@@ -294,7 +286,7 @@ const AddTest2 = ({navigation, route}) => {
                     .padStart(
                       2,
                       '0',
-                    )}.${date?.getFullYear()} (Earliest appropriate date)`}
+                    )}.${date?.getFullYear()} (Date Desired)`}
               </Text>
               <MCIcon name="calendar-edit" size={30} color="#8d8d8d" />
             </Pressable>
@@ -339,7 +331,7 @@ const AddTest2 = ({navigation, route}) => {
                     .padStart(
                       2,
                       '0',
-                    )}.${date1?.getFullYear()} (Reaction Date/Time)`}
+                    )}.${date1?.getFullYear()} (Pre OP Scheduled)`}
               </Text>
               <MCIcon name="calendar-edit" size={30} color="#8d8d8d" />
             </Pressable>

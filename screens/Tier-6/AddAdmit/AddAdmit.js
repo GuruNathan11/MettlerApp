@@ -257,7 +257,7 @@ const AddAdmit = ({navigation, route}) => {
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}>
-              <Text>
+              <Text style={{ fontSize: 20}}>
                 {/* {date1 &&
                   `${date1?.getDate().toString().padStart(2, '0')}.${parseInt(
                     date1?.getMonth() + 1,
