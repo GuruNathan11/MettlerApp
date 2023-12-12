@@ -402,6 +402,11 @@ const AllActiveQ15 = ({navigation}) => {
                       <Text style={styles.patientUname}>{item.username}</Text>
                     </View>
                     <View style={styles.orgView}>
+                      <Text style={styles.patientUname}>
+                        {item.beaconDevice}
+                      </Text>
+                    </View>
+                    <View style={styles.orgView}>
                       <Text style={styles.orgName}>{item.assignedBed}</Text>
                     </View>
                     <View style={styles.arrowView}>
@@ -456,10 +461,14 @@ const AllActiveQ15 = ({navigation}) => {
                           .charAt(0)
                           .toUpperCase() +
                           item.basicDetails[0].name[0].given.slice(1) +
-                          ' ' +
-                          item.basicDetails[0].name[0].family}
+                          ' ' + item.basicDetails[0].name[0].family}
                       </Text>
                       <Text style={styles.patientUname}>{item.username}</Text>
+                      <View style={styles.orgView}>
+                        <Text style={styles.patientUname}>
+                          {item.beaconDevice}
+                        </Text>
+                      </View>
                     </View>
                     <View style={styles.orgView}>
                       <Text style={styles.orgName}>{item.assignedBed}</Text>

@@ -1,8 +1,9 @@
 import {View, Text, Pressable, FlatList,TextInput, Alert} from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef} from 'react';
 import {styles} from './styles';
 import { PatientHeader, CheckBox, Button} from '../../../components';
 import DatePicker from 'react-native-date-picker';
+import { RNCamera } from 'react-native-camera';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -32,7 +33,9 @@ const AddAdmit = ({navigation, route}) => {
   const [comments, setComments] = useState(null);
   const [enteredDate, setEnteredDate] = useState(null);
   const [values, setValues] = useState(Array(mappedData?.length).fill(null));
-  const Urgency = useSelector(state => state.user.location);
+  const Urgency = useSelector(state => state.user.Urgency);
+  const [isCameraOpen, setIsCameraOpen] = useState(false);
+  const cameraRef = useRef(null);
   
   const [isFocusArray, setIsFocusArray] = useState(
     Array(mappedData?.length).fill(false),
@@ -109,11 +112,27 @@ const AddAdmit = ({navigation, route}) => {
       }, 
   ];
   const handleBeaconDevices = () => {
-    // Functionality related to beacon devices
-    // Add your logic here
-    // For example, you can navigate to another screen or perform some action
-    Alert.alert('Beacon Devices', 'Button Pressed for Beacon Devices');
+    setIsCameraOpen(true);
   };
+
+  const handleBarCodeScanned = ({ data }) => {
+    setMacAddress(data);
+    setIsCameraOpen(false);
+  };
+
+  const renderCamera = () => {
+    return (
+      <View style={{ flex: 1 }}>
+      <RNCamera
+        ref={cameraRef}
+        style={{ flex: 1 }}
+        onBarCodeRead={handleBarCodeScanned}
+      >
+        <Text style={{ color: 'white', fontSize: 16 }}>Scan the barcode</Text>
+      </RNCamera>
+    </View>
+  );
+};
 
   const handleSubmit = async () => {
     const rObj = {
@@ -126,7 +145,7 @@ const AddAdmit = ({navigation, route}) => {
       wardLocation: values[5],
       // bedId: '105-01',
       admissionDate: reactDate,
-      // trackingDevice: false,
+      trackingDevice: false,
       briefDescription: values[6],
       comments: comments,
     };
@@ -307,22 +326,35 @@ const AddAdmit = ({navigation, route}) => {
           <View style={styles.boxContainer}>
   {/* Your box content goes here */}
   <Pressable
-            style={{
-              backgroundColor: '#D7DEE5',
-              padding: 10,
-              borderRadius: 5,
-              alignItems: 'center',
-              flexDirection: 'row',  
-              // marginBottom: 10,
-            }}
-            onPress={handleBeaconDevices}
-          >
-             <MCIcon name="qrcode-scan" size={20} color="#000" />
-            <Text style={{ color: '#000', fontSize: 16, marginLeft: 5 }}>Beacon Devices</Text>
-          </Pressable>
+    style={{
+      backgroundColor: '#D7DEE5',
+      padding: 10,
+      borderRadius: 5,
+      alignItems: 'center',
+      flexDirection: 'row',
+      // marginBottom: 10,
+    }}
+    onPress={handleBeaconDevices} 
+  >
+    {isCameraOpen ? (
+      <View style={styles.cameraContainer}>
+        <RNCamera
+          ref={cameraRef}
+          style={styles.cameraPreview}
+          onBarCodeRead={handleBarCodeScanned}
+        >
+          <Text style={styles.cameraText}>Scan the barcode</Text>
+        </RNCamera>
+      </View>
+    ) : (
+      <>
+        <MCIcon name="qrcode-scan" size={20} color="#000" />
+        <Text style={{ color: '#000', fontSize: 16, marginLeft: 5 }}>Beacon Devices</Text>
+      </>
+    )}
+  </Pressable>
 </View>
-    
-        </ScrollView>
+      </ScrollView>
       ) : (
         <Text>Hello</Text>
       )}
@@ -338,7 +370,7 @@ const AddAdmit = ({navigation, route}) => {
         <Button
           active
           cancel
-          half
+          half 
           label="Cancel"
           onPress={() => navigation.goBack()}
         />
