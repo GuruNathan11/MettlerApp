@@ -177,4 +177,15 @@ export const styles = StyleSheet.create({
     gap: 10,
     justifyContent: 'flex-end',
   },
+
+
+  rowContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 3, // Adjust the margin as needed
+  },
+  rowText: {
+    paddingRight:55,
+    justifyContent: 'space-between',
+  },
 });

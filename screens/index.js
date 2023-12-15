@@ -53,6 +53,7 @@ import AddTest from './Tier-6/addProcedure/AddTest';
 import AddTest3 from './Tier-6/addLab/AddTest3';
 // import AddConsult from './Tier-6/addConsult/AddConsult';
 import AddAdmit from './Tier-6/AddAdmit/AddAdmit';
+import Available from './Tier-6/Beacon/Available';
 import AddTest2 from './Tier-6/AddImaging/AddTest2';
 import AddTest4 from './Tier-6/addConsult/AddTest4';
 import PatientADT from './Tier-4/patient ADT/PatientADT';
@@ -115,6 +116,7 @@ export {
   // AddLabtest,
   // AddConsult,
   AddAdmit,
+  Available,
   AddTest,
   AddTest2,
   AddTest3,

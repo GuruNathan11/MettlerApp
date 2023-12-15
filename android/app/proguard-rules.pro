@@ -8,3 +8,7 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # Add any project specific keep options here:
+# Keep the Bluetooth-related classes and their methods
+-keep class com.polidea.ble.** { *; }
+-keep class no.nordicsemi.ble.** { *; }
+-include beacon/node_modules/react-native/proguard-rules.pro

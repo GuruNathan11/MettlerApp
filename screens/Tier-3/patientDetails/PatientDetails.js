@@ -268,8 +268,8 @@ const PatientDetails = ({navigation, route}) => {
             onPress={handlePatientData}
           />
         </View>
-        <View style={{flexDirection: 'row', gap: 30, marginBottom: 15}}>
-          <VitalBtn
+        {/* <View style={{flexDirection: 'row', gap: 30, marginBottom: 15}}> */}
+          {/* <VitalBtn
             label="Treatmen Plan"
             img={require('../../../assets/images/treatmentPlan.png')}
             color="#0f3995"
@@ -281,7 +281,7 @@ const PatientDetails = ({navigation, route}) => {
             color="#80d4ff"
             onPress={handleReports}
           />
-        </View>
+        </View> */}
       </Animated.ScrollView>
     </>
   );

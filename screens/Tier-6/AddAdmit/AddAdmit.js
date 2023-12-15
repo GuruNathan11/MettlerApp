@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef} from 'react';
 import {styles} from './styles';
 import { PatientHeader, CheckBox, Button} from '../../../components';
 import DatePicker from 'react-native-date-picker';
-import { RNCamera } from 'react-native-camera';
+
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -17,6 +17,7 @@ import {Dropdown, MultiSelect}from 'react-native-element-dropdown';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector} from 'react-redux';
 import { ScrollView } from 'react-native-gesture-handler';
+import QRCodeScanner from 'react-native-qrcode-scanner'
 
 const AddAdmit = ({navigation, route}) => {
   const {patient} = route.params;
@@ -36,7 +37,9 @@ const AddAdmit = ({navigation, route}) => {
   const Urgency = useSelector(state => state.user.Urgency);
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const cameraRef = useRef(null);
-  
+
+  const [macAddress, setMacAddress] = useState(null);
+
   const [isFocusArray, setIsFocusArray] = useState(
     Array(mappedData?.length).fill(false),
   );
@@ -120,19 +123,19 @@ const AddAdmit = ({navigation, route}) => {
     setIsCameraOpen(false);
   };
 
-  const renderCamera = () => {
-    return (
-      <View style={{ flex: 1 }}>
-      <RNCamera
-        ref={cameraRef}
-        style={{ flex: 1 }}
-        onBarCodeRead={handleBarCodeScanned}
-      >
-        <Text style={{ color: 'white', fontSize: 16 }}>Scan the barcode</Text>
-      </RNCamera>
-    </View>
-  );
-};
+  // const renderCamera = () => {
+  //   return (
+  //     <View style={styles.cameraContainer}>
+  //       <RNCamera
+  //         ref={cameraRef}
+  //         style={styles.cameraPreview}
+  //         onBarCodeRead={handleBarCodeScanned}
+  //       >
+  //         <Text style={styles.cameraText}>Scan the barcode</Text>
+  //       </RNCamera>
+  //     </View>
+  //   );
+  // };
 
   const handleSubmit = async () => {
     const rObj = {
@@ -324,35 +327,67 @@ const AddAdmit = ({navigation, route}) => {
             />
           </View>
           <View style={styles.boxContainer}>
-  {/* Your box content goes here */}
-  <Pressable
+  <View style={styles.inputView}>
+          {/* MacAddress TextInput */}
+          <TextInput
+            style={[styles.input, { backgroundColor: '#F0F0F0' }]}
+            placeholder="Mac Address"
+            value={macAddress}
+            editable={false} // Make it non-editable
+          />
+            <Pressable
+    style={{
+      // backgroundColor: '#D7DEE5',
+      // padding: 5,
+      borderRadius: 5,
+      alignItems: 'center',
+      flexDirection: 'row',
+      marginBottom: 10,
+      // marginVertical: 20,
+    }}
+    onPress={handleBeaconDevices} 
+  >
+    <MCIcon name="qrcode-scan" size={35} color="#000" />
+      {/* <Text style={{ color: '#000', fontSize: 16,  justifyContent:"flex-end" }}>Beacon Devices</Text> */}
+      </Pressable>
+        </View>
+        {/* Beacon Devices Button */}
+       
+  {/* <Pressable
     style={{
       backgroundColor: '#D7DEE5',
       padding: 10,
       borderRadius: 5,
       alignItems: 'center',
       flexDirection: 'row',
-      // marginBottom: 10,
+      marginBottom: 10,
+      // marginVertical: 20,
     }}
     onPress={handleBeaconDevices} 
   >
-    {isCameraOpen ? (
-      <View style={styles.cameraContainer}>
-        <RNCamera
-          ref={cameraRef}
-          style={styles.cameraPreview}
-          onBarCodeRead={handleBarCodeScanned}
-        >
-          <Text style={styles.cameraText}>Scan the barcode</Text>
-        </RNCamera>
+    <MCIcon name="qrcode-scan" size={20} color="#000" />
+      <Text style={{ color: '#000', fontSize: 16, marginLeft: 2 }}>Beacon Devices</Text>
+      </Pressable> */}
+      
+     {isCameraOpen ? (
+  <View style={styles.cameraContainer}>
+    <QRCodeScanner
+      onRead={handleBarCodeScanned} // Use onRead instead of onBarCodeRead
+      reactivate={true}
+      reactivateTimeout={3000}
+      showMarker={true}
+      markerStyle={styles.cameraMarker}
+      containerStyle={styles.cameraPreview}
+    />
+  
       </View>
     ) : (
       <>
-        <MCIcon name="qrcode-scan" size={20} color="#000" />
-        <Text style={{ color: '#000', fontSize: 16, marginLeft: 5 }}>Beacon Devices</Text>
+        {/* <MCIcon name="qrcode-scan" size={20} color="#000" /> */}
+        {/* <Text style={{ color: '#000', fontSize: 16, marginLeft: 5 }}>Beacon Devices</Text> */}
       </>
     )}
-  </Pressable>
+  {/* </Pressable> */}
 </View>
       </ScrollView>
       ) : (

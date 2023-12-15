@@ -20,7 +20,7 @@ import {
   getImmunizationSuccess,
   getIncompletedQ15Success,
   getLocationSuccess,
-   getUrgencySuccess,
+  getUrgencySuccess,
   getNatureOfReactionSuccess,
   getPatientAllVisitSuccess,
   getPatientLastVisitSuccess,
@@ -61,11 +61,11 @@ import {
   getHowOftenSuccess,
   getspecialitySuccess,
   getplaceofConsultationSuccess,
-  
+
 } from './userSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {BASE_URL} from '@env';
-import {Alert} from 'react-native';
+import { BASE_URL } from '@env';
+import { Alert } from 'react-native';
 
 // const baseURL = BASE_URL;
 const baseURL = 'http://47.32.254.89:7000/api';
@@ -90,7 +90,7 @@ export const Login2 = async (userInfo, dispatch, navigation) => {
   dispatch(apiCallStart());
   try {
     const res = await axios.post(`${baseURL}/user/signin`, userInfo);
-    // console.log(res.data);
+    console.log(res.data);
     if (res.data.message.code === successCode) {
       // console.log(res.data.data.userDetail);
       dispatch(
@@ -107,8 +107,8 @@ export const Login2 = async (userInfo, dispatch, navigation) => {
       await AsyncStorage.setItem(
         'name',
         res.data.data.userDetail.name[0].given +
-          ' ' +
-          res.data.data.userDetail.name[0].family,
+        ' ' +
+        res.data.data.userDetail.name[0].family,
       );
       await AsyncStorage.setItem(
         'expireTime',
@@ -134,6 +134,7 @@ export const SecretKeyVerify = async (userInfo, dispatch) => {
     const res = await axios.post(`${baseURL}/user/verify`, userInfo);
     if (res.data.message.code === successCode) {
       dispatch(sKeyVerifySuccess());
+
     } else {
       dispatch(apiCallError(res.data.message.description));
     }
@@ -194,7 +195,7 @@ export const RetriveLogin = async dispatch => {
 export const ForgotPassword1 = async (email, dispatch, navigation) => {
   dispatch(apiCallStart());
   try {
-    const res = await axios.post(`${baseURL}/user/forgot-password`, {email});
+    const res = await axios.post(`${baseURL}/user/forgot-password`, { email });
     if (res.data.message.code === successCode) {
       dispatch(apiCallSuccess());
       navigation.navigate('OtpSuccess');
@@ -339,6 +340,9 @@ export const PostQ15Entry = async (
   shiftName,
   TodayRN,
   dispatch,
+rssi,
+          timestamp,
+            deviceId
 ) => {
   dispatch(apiCallStart());
   try {
@@ -355,8 +359,11 @@ export const PostQ15Entry = async (
       enteredBy: username,
       shift: shiftName,
       shiftIncharge: TodayRN,
+      rssi: rssi,
+      deviceTimeStamp: timestamp,
+      deviceId: deviceId,
     });
-    console.log(shiftName);
+    console.log(rssi);
     // console.log(q15Slot);
     dispatch(postQ15EntrySuccess());
   } catch (error) {
@@ -419,7 +426,7 @@ export const getShiftTimes = async dispatch => {
     if (res.data.data) {
       dispatch(getShiftStartTimesSuccess(res.data.data.shift.startTime));
       dispatch(getShiftDurationSuccess(res.data.data.shift.duration));
-      
+
     }
   } catch (error) {
     console.log(error);
@@ -582,7 +589,7 @@ export const getDropdowns = async (dispatch, name) => {
       dispatch(getTreatmentFactorsSuccess(res.data.data[0].list));
     }
     else if (name === 'patientPosition') {
-       dispatch(getPatientPositionSuccess(res.data.data[0].list));
+      dispatch(getPatientPositionSuccess(res.data.data[0].list));
       //  console.log(res.data[0])
     }
   } catch (error) {
@@ -794,7 +801,7 @@ export const labTest = async (dispatch, rObj) => {
   } catch (error) {
     console.log(error);
     console.log(rObj);
-     Alert.alert(error);
+    Alert.alert(error);
     dispatch(apiCallError(error.response.data.errorMessage));
   }
 };
@@ -824,7 +831,7 @@ export const labConsult = async (dispatch, rObj) => {
   } catch (error) {
     console.log(error);
     console.log(rObj);
-     Alert.alert(error);
+    Alert.alert(error);
     dispatch(apiCallError(error.response.data.errorMessage));
   }
 };
@@ -891,7 +898,7 @@ export const getConsultByPatient = async (dispatch, pid) => {
 };
 
 //admit patient
-export const postAdmit= async (dispatch, rObj) => {
+export const postAdmit = async (dispatch, rObj) => {
   dispatch(apiCallStart());
   try {
     const res = await axios.post(`${baseURL}/admit/add`, rObj);
@@ -904,7 +911,7 @@ export const postAdmit= async (dispatch, rObj) => {
   } catch (error) {
     console.log(error);
     console.log(rObj);
-     Alert.alert(error);
+    Alert.alert(error);
     dispatch(apiCallError(error.response.data.errorMessage));
   }
 };
@@ -929,7 +936,7 @@ export const getBedConfig = async (dispatch) => {
 
 // getBy admit by id 
 
-export const getAdmit = async (dispatch,pid) => {
+export const getAdmit = async (dispatch, pid) => {
   dispatch(apiCallStart());
   try {
     const res = await axios.get(`${baseURL}/admit/getByPid/${pid}`);

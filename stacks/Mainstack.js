@@ -1,7 +1,10 @@
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import React, {useEffect, useState} from 'react';
 import {
+  AddAdmit,
   AdminConfiguration,
+  AllActiveQ15,
+  Available,
   OrganizationDetails,
   PatientManagement,
   PatientStaffAssign,
@@ -9,7 +12,7 @@ import {
   Q15StaffConfiguration,
   
 } from '../screens';
-import StaffDetails from '../screens/staffDetails/StaffDetails';
+// import StaffDetails from '../screens/staffDetails/StaffDetails';
 import {useDispatch, useSelector} from 'react-redux';
 import Toast from 'react-native-simple-toast';
 import PatientsStacks from './patientsStacks/PatientsStacks';
@@ -83,6 +86,8 @@ const Mainstack = () => {
   };
   useEffect(() => {
     getRoleAndResetCount();
+    console.log('Admin Test')
+    console.log(role)
   }, []);
   return (
     <>
@@ -96,109 +101,13 @@ const Mainstack = () => {
             drawerLabelStyle: {marginLeft: -15},
           }}>
           <Drawer.Screen
-            name="Dashboard"
-            listeners={{
-              drawerItemPress: () => {
-                navigation.navigate('Patients');
-              },
-            }}
-            component={PatientsStacks}
+            name="Q-15 Safety Check Routine"
+            component={AllActiveQ15}
             options={{
               drawerIcon: ({focused, size, color}) => (
                 <MCIcon
                   name="view-dashboard-outline"
                   size={size}
-                  color={focused ? '#fff' : '#000'}
-                />
-              ),
-            }}
-          />
-          <Drawer.Screen
-            name="Patients1"
-            component={PatientsStacks}
-            options={{
-              drawerIcon: ({focused, size, color}) => (
-                <Icon
-                  name="people-outline"
-                  size={size}
-                  color={focused ? '#fff' : '#000'}
-                />
-              ),
-            }}
-          />
-          <Drawer.Screen
-            name="StaffDetails"
-            component={StaffDetails}
-            options={{
-              drawerIcon: ({focused, size, color}) => (
-                <MCIcon
-                  name="account-cog-outline"
-                  size={size}
-                  color={focused ? '#fff' : '#000'}
-                />
-              ),
-            }}
-          />
-          <Drawer.Screen
-            name="OrganizationDetails"
-            component={OrganizationDetails}
-            options={{
-              drawerIcon: ({focused, size, color}) => (
-                <FA5Icon
-                  name="building"
-                  size={size}
-                  color={focused ? '#fff' : '#000'}
-                />
-              ),
-            }}
-          />
-          <Drawer.Screen
-            name="PatientManagement"
-            component={PatientManagement}
-            options={{
-              drawerIcon: ({focused, size, color}) => (
-                <MCIcon
-                  name="file-document-outline"
-                  size={size}
-                  color={focused ? '#fff' : '#000'}
-                />
-              ),
-            }}
-          />
-          <Drawer.Screen
-            name="PatientStaffAssign"
-            component={PatientStaffAssign}
-            options={{
-              drawerIcon: ({focused, size, color}) => (
-                <FA5Icon
-                  name="chalkboard-teacher"
-                  size={size}
-                  color={focused ? '#fff' : '#000'}
-                />
-              ),
-            }}
-          />
-          <Drawer.Screen
-            name="Q15StaffConfiguration"
-            component={Q15StaffConfiguration}
-            options={{
-              drawerIcon: ({focused, size, color}) => (
-                <MCIcon
-                  name="fast-forward-15"
-                  size={27}
-                  color={focused ? '#fff' : '#000'}
-                />
-              ),
-            }}
-          />
-          <Drawer.Screen
-            name="AdminConfiguration"
-            component={AdminConfiguration}
-            options={{
-              drawerIcon: ({focused, size, color}) => (
-                <Icon
-                  name="admin-panel-settings"
-                  size={27}
                   color={focused ? '#fff' : '#000'}
                 />
               ),
@@ -214,12 +123,6 @@ const Mainstack = () => {
             }}
           />
         </Drawer.Navigator>
-      {/* ) : (
-        <SafeAreaView>
-          <Text>Stay Tuned.... Patient View is on Progress</Text>
-          <Button label="Signout" active onPress={handleSignout} />
-        </SafeAreaView>
-      )} */}
     </>
   );
 };

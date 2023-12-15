@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
+  Text,
 } from 'react-native';
 import React, {useEffect, useMemo, useState} from 'react';
 import {styles} from './styles';
@@ -335,8 +336,10 @@ const ShiftComponent = ({
           </View>
         )}
       />
-      <View style={{alignItems: 'center'}}>
-        <Button label="Submit" active onPress={handleSubmit} />
+      <View style={{alignItems: 'center', marginVertical: 20}}>
+      <TouchableOpacity activeOpacity={0.8}  onPress={handleSubmit} style={{backgroundColor: '#0f3995', padding: 10, paddingHorizontal: 15,width: '80%', borderRadius: 10, height: 60, justifyContent: "center", alignItems: 'center'}}>
+            <Text style={{color: "#FFF", fontWeight: '600', fontSize: 18}}>Submit</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
